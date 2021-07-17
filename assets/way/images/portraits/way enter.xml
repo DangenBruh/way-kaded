@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="way enter.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="way enter0000" x="0" y="0" width="317" height="121" frameX="-1" frameY="0" frameWidth="320" frameHeight="122"/>
+	<SubTexture name="way enter0001" x="0" y="0" width="317" height="121" frameX="-1" frameY="0" frameWidth="320" frameHeight="122"/>
+	<SubTexture name="way enter0002" x="0" y="121" width="317" height="121" frameX="0" frameY="0" frameWidth="320" frameHeight="122"/>
+	<SubTexture name="way enter0003" x="0" y="121" width="317" height="121" frameX="0" frameY="0" frameWidth="320" frameHeight="122"/>
+	<SubTexture name="way enter0004" x="0" y="242" width="318" height="121" frameX="-2" frameY="-1" frameWidth="320" frameHeight="122"/>
+	<SubTexture name="way enter0005" x="0" y="242" width="318" height="121" frameX="-2" frameY="-1" frameWidth="320" frameHeight="122"/>
+</TextureAtlas>

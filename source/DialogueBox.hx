@@ -46,6 +46,9 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'way':
+				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -87,6 +90,52 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
+
+			// order of songs doesn't matter!
+
+			case 'way':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 375;
+				// left n right portraits should be changed here, or in another line idfk
+
+			case 'always':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 375;
+				// left n right portraits should be changed here, or in another line idfk
+			
+			case 'sussy':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 375;
+				// left n right portraits should be changed here, or in another line idfk
+
+			case 'no-way':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.width = 200;
+				box.height = 200;
+				box.x = -100;
+				box.y = 375;
+				// left n right portraits should be changed here, or in another line idfk
 		}
 
 		this.dialogueList = dialogueList;
@@ -94,23 +143,55 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 		
-		portraitLeft = new FlxSprite(-20, 40);
-		portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
-		portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
-		portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-		portraitLeft.updateHitbox();
-		portraitLeft.scrollFactor.set();
-		add(portraitLeft);
-		portraitLeft.visible = false;
+		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns')
+			{
+				portraitLeft = new FlxSprite(-20, 40); //technically there is no senpai songs???? idk remove if you need to
+				portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
+				portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitLeft.visible = false;
 
-		portraitRight = new FlxSprite(0, 40);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = false;
+			}
+		else if (PlayState.SONG.song.toLowerCase() == 'way')
+			{
+				portraitLeft = new FlxSprite(0, 333.3);
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/way enter', 'way');
+				portraitLeft.animation.addByPrefix('enter', 'way enter', 24, false);
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+			}
+		else if (PlayState.SONG.song.toLowerCase() == 'always' || PlayState.SONG.song.toLowerCase() == 'no-way' || PlayState.SONG.song.toLowerCase() == 'sussy')
+			{
+				portraitLeft = new FlxSprite(0, 333.3);
+				portraitLeft.frames = Paths.getSparrowAtlas('portraits/way mad', 'way');
+				portraitLeft.animation.addByPrefix('enter', 'way mad', 24, false);
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+			}
+		if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns')
+			{
+				portraitRight = new FlxSprite(0, 40);
+				portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
+				portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+			}
+		else if (PlayState.SONG.song.toLowerCase() == 'way' || PlayState.SONG.song.toLowerCase() == 'always' || PlayState.SONG.song.toLowerCase() == 'no-way' || PlayState.SONG.song.toLowerCase() == 'sussy')
+			{
+				portraitRight = new FlxSprite(699.35, 207.3);
+				portraitRight.frames = Paths.getSparrowAtlas('portraits/bf', 'way');
+				portraitRight.animation.addByPrefix('enter', 'bf enter', 24, false);
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+			}
 		
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -177,7 +258,7 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if (PlayerSettings.player1.controls.ACCEPT && dialogueStarted == true)
+		if (FlxG.keys.justPressed.ANY  && dialogueStarted == true)
 		{
 			remove(dialogue);
 				
@@ -248,6 +329,13 @@ class DialogueBox extends FlxSpriteGroup
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
 				}
+			case 'gf':
+				portraitLeft.visible = false;
+					if (!portraitRight.visible)
+					{
+						portraitRight.visible = true;
+						portraitRight.animation.play('enter');
+					}
 		}
 	}
 

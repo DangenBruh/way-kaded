@@ -1,19 +1,11 @@
 Tutorial:gf:1
-Bopeebo:dad:1
-Fresh:dad:1
-Dad Battle:dad:1
-Spookeez:spooky:2
-South:spooky:2
-Monster:monster:2
-Pico:pico:3
-Philly Nice:pico:3
-Blammed:pico:3
-Satin Panties:mom:4
-High:mom:4
-Milf:mom:4
-Cocoa:parents-christmas:5
-Eggnog:parents-christmas:5
-Winter Horrorland:monster-christmas:5
-Senpai:senpai:6
-Roses:senpai:6
-Thorns:spirit:6
+Way:way:7
+Always:way-angy:7
+No-way:way-mad:7
+Sussy:bf-sus:7
+Crewmate:crewmate:7
+all-below-is-not-canon:gf:8
+expurgation:jads:8
+animal:atsuover:8
+casanova:mike:8
+fun:expurgation:8
