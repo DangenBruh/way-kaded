@@ -238,7 +238,7 @@ class PlayState extends MusicBeatState
 	{
 		instance = this;
 		
-		if (FlxG.save.data.fpsCap > 290)
+		if (FlxG.save.data.fpsCap > 480)
 			(cast (Lib.current.getChildAt(0), Main)).setFPSCap(800);
 		
 		if (FlxG.sound.music != null)
@@ -365,6 +365,14 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
 			case 'thorns':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
+			case 'way':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('way/wayDialogue'));
+			case 'always':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('always/alwaysDialogue'));
+			case 'no-way':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('no-way/no-wayDialogue'));
+			case 'sussy':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('sussy/sussyDialogue'));
 		}
 
 		//defaults if no stage was found in chart
@@ -1528,10 +1536,10 @@ class PlayState extends MusicBeatState
 				
 				case 'normal':
 					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
-					babyArrow.animation.addByPrefix('green', 'arrow static instance 1');
-					babyArrow.animation.addByPrefix('blue', 'arrow static instance 2');
-					babyArrow.animation.addByPrefix('purple', 'arrow static instance 3');
-					babyArrow.animation.addByPrefix('red', 'arrow static instance 4');
+					babyArrow.animation.addByPrefix('green', 'arrowUP');
+					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
+					babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
+					babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
 	
 					babyArrow.antialiasing = true;
 					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
@@ -1540,59 +1548,59 @@ class PlayState extends MusicBeatState
 					{
 						case 0:
 							babyArrow.x += Note.swagWidth * 0;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 1');
-							babyArrow.animation.addByPrefix('pressed', 'left press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'left confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
 						case 1:
 							babyArrow.x += Note.swagWidth * 1;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 2');
-							babyArrow.animation.addByPrefix('pressed', 'down press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'down confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 4');
-							babyArrow.animation.addByPrefix('pressed', 'up press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'up confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowUP');
+							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
 						case 3:
 							babyArrow.x += Note.swagWidth * 3;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 3');
-							babyArrow.animation.addByPrefix('pressed', 'right press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'right confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
 						}
 
 				default:
 					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
-					babyArrow.animation.addByPrefix('green', 'arrow static instance 1');
-					babyArrow.animation.addByPrefix('blue', 'arrow static instance 2');
-					babyArrow.animation.addByPrefix('purple', 'arrow static instance 3');
-					babyArrow.animation.addByPrefix('red', 'arrow static instance 4');
-
+					babyArrow.animation.addByPrefix('green', 'arrowUP');
+					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
+					babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
+					babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
+	
 					babyArrow.antialiasing = true;
 					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
-
+	
 					switch (Math.abs(i))
 					{
 						case 0:
 							babyArrow.x += Note.swagWidth * 0;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 1');
-							babyArrow.animation.addByPrefix('pressed', 'left press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'left confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
 						case 1:
 							babyArrow.x += Note.swagWidth * 1;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 2');
-							babyArrow.animation.addByPrefix('pressed', 'down press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'down confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
 						case 2:
 							babyArrow.x += Note.swagWidth * 2;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 4');
-							babyArrow.animation.addByPrefix('pressed', 'up press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'up confirm instance 1', 24, false);
+							babyArrow.animation.addByPrefix('static', 'arrowUP');
+							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
 						case 3:
 							babyArrow.x += Note.swagWidth * 3;
-							babyArrow.animation.addByPrefix('static', 'arrow static instance 3');
-							babyArrow.animation.addByPrefix('pressed', 'right press instance 1', 24, false);
-							babyArrow.animation.addByPrefix('confirm', 'right confirm instance 1', 24, false);
-					}
+							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
+						}
 			}
 
 			babyArrow.updateHitbox();
@@ -2501,23 +2509,6 @@ class PlayState extends MusicBeatState
 
 		if (isStoryMode)
 			campaignMisses = misses;
-			switch (curSong)
-			{
-				case 'always':
-					if (accuracy <= 60)
-						FlxG.switchState(new EndingState());
-					else
-						LoadingState.loadAndSwitchState(new VideoState("assets/videos/noway/cutscene2.webm", new PlayState()));
-				case 'sussy':
-					if (accuracy >= 60)
-						FlxG.switchState(new EndingState3());
-					else
-						FlxG.switchState(new FreeplayState());
-				case 'no-way':
-					if (accuracy <= 85)
-						FlxG.switchState(new EndingState2());
-				}
-
 		if (!loadRep)
 			rep.SaveReplay(saveNotes, saveJudge, replayAna);
 		else
@@ -2527,8 +2518,8 @@ class PlayState extends MusicBeatState
 			PlayStateChangeables.useDownscroll = false;
 		}
 
-		if (FlxG.save.data.fpsCap > 290)
-			(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
+		if (FlxG.save.data.fpsCap > 480)
+			(cast (Lib.current.getChildAt(0), Main)).setFPSCap(480);
 
 		#if windows
 		if (luaModchart != null)
@@ -2636,6 +2627,23 @@ class PlayState extends MusicBeatState
 
 						FlxG.sound.play(Paths.sound('Lights_Shut_off'));
 					}
+
+					switch (curSong)
+					{
+						case 'always':
+							if (accuracy <= 60)
+								FlxG.switchState(new EndingState());
+							else
+								LoadingState.loadAndSwitchState(new VideoState("assets/videos/HankFuckingShootsTricky.webm",new PlayState()));
+						case 'sussy':
+							if (accuracy >= 60)
+								FlxG.switchState(new EndingState3());
+							else
+								FlxG.switchState(new FreeplayState());
+						case 'no-way':
+							if (accuracy <= 85)
+								FlxG.switchState(new EndingState2());
+						}
 
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;

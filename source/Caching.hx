@@ -86,10 +86,13 @@ class Caching extends MusicBeatState
 
         trace("caching images...");
 
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images")))
         {
-            if (!i.endsWith(".png"))
-                continue;
+            images.push(i);
+        }
+        
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/videos")))
+        {
             images.push(i);
         }
 
@@ -107,7 +110,7 @@ class Caching extends MusicBeatState
         for (i in images)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
+            // FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
         }
