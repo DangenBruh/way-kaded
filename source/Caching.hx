@@ -83,6 +83,7 @@ class Caching extends MusicBeatState
 
         var images = [];
         var music = [];
+        var videos = [];
 
         trace("caching images...");
 
@@ -90,7 +91,7 @@ class Caching extends MusicBeatState
         {
             images.push(i);
         }
-        
+
         for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/videos")))
         {
             images.push(i);
@@ -110,7 +111,7 @@ class Caching extends MusicBeatState
         for (i in images)
         {
             var replaced = i.replace(".png","");
-            // FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
         }

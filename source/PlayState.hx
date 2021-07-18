@@ -2634,7 +2634,7 @@ class PlayState extends MusicBeatState
 							if (accuracy <= 60)
 								FlxG.switchState(new EndingState());
 							else
-								LoadingState.loadAndSwitchState(new VideoState("assets/videos/HankFuckingShootsTricky.webm",new PlayState()));
+								LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene2.webm",new PlayState()));
 						case 'sussy':
 							if (accuracy >= 60)
 								FlxG.switchState(new EndingState3());
