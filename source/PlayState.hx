@@ -393,9 +393,128 @@ class PlayState extends MusicBeatState
 		if (!PlayStateChangeables.Optimize)
 		{
 
-		switch(stageCheck)
-		{
-			case 'stage':
+			switch(stageCheck)
+			{
+				case 'stage':
+					{
+							defaultCamZoom = 0.9;
+							curStage = 'stage';
+							var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+							bg.antialiasing = true;
+							bg.scrollFactor.set(0.9, 0.9);
+							bg.active = false;
+							add(bg);
+		
+							var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+							stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+							stageFront.updateHitbox();
+							stageFront.antialiasing = true;
+							stageFront.scrollFactor.set(0.9, 0.9);
+							stageFront.active = false;
+							add(stageFront);
+		
+							var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+							stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+							stageCurtains.updateHitbox();
+							stageCurtains.antialiasing = true;
+							stageCurtains.scrollFactor.set(1.3, 1.3);
+							stageCurtains.active = false;
+		
+							add(stageCurtains);
+					}
+				case 'wayBg':
+					{
+						curStage = 'wayBg';
+						defaultCamZoom = 0.78;
+
+						var bak:FlxSprite = new FlxSprite( -515.75, -273.75).loadGraphic(Paths.image('wayBg/wayback', 'way'));
+						bak.antialiasing = true;
+						bak.scrollFactor.set(0, 0);
+						bak.active = false;
+						bak.updateHitbox();
+						add(bak);
+
+						var light:FlxSprite = new FlxSprite( 74.55, -322.25).loadGraphic(Paths.image('wayBg/waylight', 'way'));
+						light.antialiasing = true;
+						light.scrollFactor.set(0.1, 0.1);
+						light.active = false;
+						light.updateHitbox();
+						add(light);
+
+						var flor:FlxSprite = new FlxSprite( -502.65, 702.35).loadGraphic(Paths.image('wayBg/wayfloor', 'way'));
+						flor.antialiasing = true;
+						flor.scrollFactor.set(0.9, 0.9);
+						flor.active = false;
+						flor.updateHitbox();
+						add(flor);
+					}
+				case 'sussyBg':
+					{
+						curStage = 'sussyBg';
+
+						var bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						bg.antialiasing = true;
+						bg.scrollFactor.set(0.2, 0.2);
+						bg.active = false;
+						add(bg);
+					}
+				case 'MadWayBg':
+					{
+						curStage = 'MadWayBg';
+						defaultCamZoom = 0.9;
+
+						var backBG:FlxSprite = new FlxSprite(-813.05, -229.25).loadGraphic(Paths.image('MadWayBg/bg', 'way'));
+						backBG.updateHitbox();
+						backBG.antialiasing = true;
+						backBG.scrollFactor.set(0.6, 0.6);
+						add(backBG);
+
+						var fireBG:FlxSprite = new FlxSprite(-786.2, -161.15);
+						fireBG.frames = Paths.getSparrowAtlas('MadWayBg/fires', 'way');
+						fireBG.animation.addByPrefix('idle', "fires", 24, true);
+						fireBG.updateHitbox();
+						fireBG.antialiasing = true;
+						fireBG.scrollFactor.set(0.89, 0.89);
+						fireBG.active = true;
+						fireBG.animation.play('idle');
+						add(fireBG);
+
+						var floorBG:FlxSprite = new FlxSprite(-823.15, 462.35).loadGraphic(Paths.image('MadWayBg/floor', 'way'));
+						floorBG.antialiasing = true;
+						floorBG.scrollFactor.set(0.9, 0.9);
+						floorBG.active = false;
+						add(floorBG);
+					}
+				case 'skeld':
+				{
+					curStage = 'skeld';
+					defaultCamZoom = 0.9;
+
+					var skeldBG:FlxSprite = new FlxSprite(-496.1, -280.05).loadGraphic(Paths.image('skeld/bg', 'way'));
+					skeldBG.updateHitbox();
+					skeldBG.antialiasing = true;
+					skeldBG.scrollFactor.set(0, 0);
+					add(skeldBG);
+
+					var skeldITSELF:FlxSprite = new FlxSprite(-403.1, 150.25).loadGraphic(Paths.image('skeld/skeld', 'way'));
+					skeldITSELF.updateHitbox();
+					skeldITSELF.antialiasing = true;
+					skeldITSELF.scrollFactor.set(0.67, 0.67);
+					add(skeldITSELF);
+
+					var skeldBACK:FlxSprite = new FlxSprite(370.75, 310.6).loadGraphic(Paths.image('skeld/back', 'way'));
+					skeldBACK.updateHitbox();
+					skeldBACK.antialiasing = true;
+					skeldBACK.scrollFactor.set(0.7, 0.7);
+					add(skeldBACK);
+
+					var skeldFRONT:FlxSprite = new FlxSprite(-470.45, 408.45).loadGraphic(Paths.image('skeld/front', 'way'));
+					skeldFRONT.updateHitbox();
+					skeldFRONT.antialiasing = true;
+					skeldFRONT.scrollFactor.set(0.8, 0.8);
+					add(skeldFRONT);
+				}
+				default:
 				{
 						defaultCamZoom = 0.9;
 						curStage = 'stage';
@@ -404,7 +523,7 @@ class PlayState extends MusicBeatState
 						bg.scrollFactor.set(0.9, 0.9);
 						bg.active = false;
 						add(bg);
-	
+
 						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
 						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 						stageFront.updateHitbox();
@@ -412,136 +531,17 @@ class PlayState extends MusicBeatState
 						stageFront.scrollFactor.set(0.9, 0.9);
 						stageFront.active = false;
 						add(stageFront);
-	
+
 						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 						stageCurtains.updateHitbox();
 						stageCurtains.antialiasing = true;
 						stageCurtains.scrollFactor.set(1.3, 1.3);
 						stageCurtains.active = false;
-	
+
 						add(stageCurtains);
 				}
-			case 'wayBg':
-				{
-					curStage = 'wayBg';
-					defaultCamZoom = 0.78;
-
-					var bak:FlxSprite = new FlxSprite( -515.75, -273.75).loadGraphic(Paths.image('wayBg/wayback', 'way'));
-					bak.antialiasing = true;
-					bak.scrollFactor.set(0, 0);
-					bak.active = false;
-					bak.updateHitbox();
-					add(bak);
-
-					var light:FlxSprite = new FlxSprite( 74.55, -322.25).loadGraphic(Paths.image('wayBg/waylight', 'way'));
-					light.antialiasing = true;
-					light.scrollFactor.set(0.1, 0.1);
-					light.active = false;
-					light.updateHitbox();
-					add(light);
-
-					var flor:FlxSprite = new FlxSprite( -502.65, 702.35).loadGraphic(Paths.image('wayBg/wayfloor', 'way'));
-					flor.antialiasing = true;
-					flor.scrollFactor.set(0.9, 0.9);
-					flor.active = false;
-					flor.updateHitbox();
-					add(flor);
-				}
-			case 'sussyBg':
-				{
-					curStage = 'sussyBg';
-
-					var bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.2, 0.2);
-					bg.active = false;
-					add(bg);
-				}
-			case 'MadWayBg':
-			{
-					curStage = 'MadWayBg';
-					defaultCamZoom = 0.9;
-
-					var backBG:FlxSprite = new FlxSprite(-813.05, -229.25).loadGraphic(Paths.image('MadWayBg/bg', 'way'));
-					backBG.updateHitbox();
-					backBG.antialiasing = true;
-					backBG.scrollFactor.set(0.6, 0.6);
-					add(backBG);
-
-					var fireBG:FlxSprite = new FlxSprite(-786.2, -161.15);
-					fireBG.frames = Paths.getSparrowAtlas('MadWayBg/fires', 'way');
-					fireBG.animation.addByPrefix('idle', "fires", 24, true);
-					fireBG.updateHitbox();
-					fireBG.antialiasing = true;
-					fireBG.scrollFactor.set(0.89, 0.89);
-					fireBG.active = true;
-					fireBG.animation.play('idle');
-					add(fireBG);
-
-					var floorBG:FlxSprite = new FlxSprite(-823.15, 462.35).loadGraphic(Paths.image('MadWayBg/floor', 'way'));
-					floorBG.antialiasing = true;
-					floorBG.scrollFactor.set(0.9, 0.9);
-					floorBG.active = false;
-					add(floorBG);
 			}
-			case 'skeld':
-			{
-				curStage = 'skeld';
-				defaultCamZoom = 0.9;
-
-				var skeldBG:FlxSprite = new FlxSprite(-496.1, -280.05).loadGraphic(Paths.image('skeld/bg', 'way'));
-				skeldBG.updateHitbox();
-				skeldBG.antialiasing = true;
-				skeldBG.scrollFactor.set(0, 0);
-				add(skeldBG);
-
-				var skeldITSELF:FlxSprite = new FlxSprite(-403.1, 150.25).loadGraphic(Paths.image('skeld/skeld', 'way'));
-				skeldITSELF.updateHitbox();
-				skeldITSELF.antialiasing = true;
-				skeldITSELF.scrollFactor.set(0.67, 0.67);
-				add(skeldITSELF);
-
-				var skeldBACK:FlxSprite = new FlxSprite(370.75, 310.6).loadGraphic(Paths.image('skeld/back', 'way'));
-				skeldBACK.updateHitbox();
-				skeldBACK.antialiasing = true;
-				skeldBACK.scrollFactor.set(0.7, 0.7);
-				add(skeldBACK);
-
-				var skeldFRONT:FlxSprite = new FlxSprite(-470.45, 408.45).loadGraphic(Paths.image('skeld/front', 'way'));
-				skeldFRONT.updateHitbox();
-				skeldFRONT.antialiasing = true;
-				skeldFRONT.scrollFactor.set(0.8, 0.8);
-				add(skeldFRONT);
-			}
-			default:
-			{
-					defaultCamZoom = 0.9;
-					curStage = 'stage';
-					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.9, 0.9);
-					bg.active = false;
-					add(bg);
-
-					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-					stageFront.updateHitbox();
-					stageFront.antialiasing = true;
-					stageFront.scrollFactor.set(0.9, 0.9);
-					stageFront.active = false;
-					add(stageFront);
-
-					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-					stageCurtains.updateHitbox();
-					stageCurtains.antialiasing = true;
-					stageCurtains.scrollFactor.set(1.3, 1.3);
-					stageCurtains.active = false;
-
-					add(stageCurtains);
-			}
-		}
 		}
 		//defaults if no gf was found in chart
 		var gfCheck:String = 'gf';
@@ -593,8 +593,8 @@ class PlayState extends MusicBeatState
 				camPos.x += 70;
 				tweenCamIn();
 			case 'sussyBg':
-				dad.x = 126;
-				dad.y = 823;
+				dad.x = 281.9;
+				dad.y = 908.35;
 			case 'skeld':
 				dad.x = 97.25;
 				dad.y = 401.05;
@@ -656,8 +656,12 @@ class PlayState extends MusicBeatState
 			case 'sussyBg':
 				boyfriend.x = 1199;
 				boyfriend.y = 559;
+
 				gf.x = 564.45;
 				gf.y = 274.35;
+				
+				dad.x = 281.9;
+				dad.y = 908.35;
 			case 'skeld':
 				dad.x = 97.25;
 				dad.y = 401.05;
@@ -3643,6 +3647,18 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
+		if (curSong == 'no-way') 
+			{
+				switch (curStep)
+				{
+					case 481:
+						boyfriend.playAnim("hit");
+						gf.playAnim("scared");
+					case 925:
+						boyfriend.playAnim("hit");
+						gf.playAnim("scared");
+				 }
+			}
 
 		#if windows
 		if (executeModchart && luaModchart != null)
