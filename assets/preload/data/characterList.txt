@@ -1,6 +1,7 @@
 bf
 bf-rtx
-bf-sus
+bf-sus-first
+bf-sus-second
 bf-christmas
 gf
 gf-rtx

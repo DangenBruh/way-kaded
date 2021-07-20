@@ -72,10 +72,6 @@ class KeyBinds
             FlxG.save.data.gprightBind = "DPAD_RIGHT";
             trace("No GRIGHT");
         }
-	if(FlxG.save.data.killBind == null){
-            FlxG.save.data.killBind = "R";
-            trace("No KILL");
-        }
 
         trace('${FlxG.save.data.leftBind}-${FlxG.save.data.downBind}-${FlxG.save.data.upBind}-${FlxG.save.data.rightBind}');
     }
