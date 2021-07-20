@@ -92,7 +92,21 @@ class Character extends FlxSprite
 				addOffset('scared', -2, -17);
 
 				playAnim('danceRight');
+			case 'gf-pixel':
+				tex = Paths.getSparrowAtlas('characters/gfPixel');
+				frames = tex;
+				animation.addByIndices('singUP', 'GF IDLE', [2], "", 24, false);
+				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'GF IDLE', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 
+				addOffset('danceLeft', 0);
+				addOffset('danceRight', 0);
+
+				playAnim('danceRight');
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+				antialiasing = false;
 			case 'bf':
 				var tex = Paths.getSparrowAtlas('characters/BOYFRIEND', 'shared');
 				frames = tex;
@@ -306,10 +320,10 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -38, -7);
 				addOffset("singLEFT", 12, -6);
 				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
+				addOffset("singUPmiss", -40, -19);
 				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
+				addOffset("singLEFTmiss", -45, 36);
+				addOffset("singDOWNmiss", -19, -20);
 				addOffset("hit", 7, 4);
 
 				playAnim('idle');
@@ -437,6 +451,26 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -5, -9);
 
 				playAnim('idle');
+			case 'way-pixel':
+				frames = Paths.getSparrowAtlas('characters/way-pixel');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+
+				addOffset('idle', 0, 0);
+				addOffset("singUP", 0, 13);
+				addOffset("singRIGHT", -8, 0);
+				addOffset("singLEFT", 4, 0);
+				addOffset("singDOWN", 0, -8);
+
+				setGraphicSize(Std.int(width * 8));
+				updateHitbox();
+
+				playAnim('idle');
+
+				antialiasing = false;
 		}
 
 		dance();
@@ -507,6 +541,16 @@ class Character extends FlxSprite
 			switch (curCharacter)
 			{
 				case 'gf':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+				case 'gf-pixel':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;

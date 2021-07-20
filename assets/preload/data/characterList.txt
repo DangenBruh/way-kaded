@@ -3,13 +3,10 @@ bf-rtx
 bf-sus-first
 bf-sus-second
 bf-christmas
-gf
-gf-rtx
-gf-christmas
-speakers
 way
 way-angy
 way-mad
 way-dead
+way-pixel
 expurgation
 crewmate
