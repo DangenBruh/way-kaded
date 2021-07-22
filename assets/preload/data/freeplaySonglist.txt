@@ -2,7 +2,7 @@ Tutorial:gf:1
 Way:way:7
 Always:way-angy:7
 No-way:way-mad:7
-Sussy:bf-sus:7
+Sussy:bf-sus-first:7
 Crewmate:crewmate:7
 all-below-is-not-canon:gf:8
 expurgation:jads:8

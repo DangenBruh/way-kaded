@@ -1471,6 +1471,7 @@
     "validScore": true,
     "stage": "school",
     "needsVoices": true,
+    "noteStyle": "pixel",
     "sections": 0,
     "speed": 1.8,
     "bpm": 161

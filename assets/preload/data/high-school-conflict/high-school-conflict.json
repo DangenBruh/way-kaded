@@ -1470,6 +1470,7 @@
     "song": "High School Conflict",
     "validScore": true,
     "stage": "school",
+    "noteStyle": "pixel",
     "needsVoices": true,
     "sections": 0,
     "speed": 2,

@@ -631,6 +631,8 @@ class PlayState extends MusicBeatState
 		{
 			case 'gf-car':
 				curGf = 'gf-car';
+			case 'gf-rtx':
+				curGf = 'gf-rtx';
 			case 'gf-christmas':
 				curGf = 'gf-christmas';
 			case 'gf-pixel':
@@ -1170,16 +1172,7 @@ class PlayState extends MusicBeatState
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
-			introAssets.set('school', [
-				'weeb/pixelUI/ready-pixel',
-				'weeb/pixelUI/set-pixel',
-				'weeb/pixelUI/date-pixel'
-			]);
-			introAssets.set('schoolEvil', [
-				'weeb/pixelUI/ready-pixel',
-				'weeb/pixelUI/set-pixel',
-				'weeb/pixelUI/date-pixel'
-			]);
+			introAssets.set('school', ['ready-pixel', 'set-pixel', 'date-pixel']);
 
 			var introAlts:Array<String> = introAssets.get('default');
 			var altSuffix:String = "";
@@ -1568,7 +1561,7 @@ class PlayState extends MusicBeatState
 			switch (noteTypeCheck)
 			{
 				case 'pixel':
-					babyArrow.loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
+					babyArrow.loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
 					babyArrow.animation.add('green', [6]);
 					babyArrow.animation.add('red', [7]);
 					babyArrow.animation.add('blue', [5]);
@@ -1634,9 +1627,10 @@ class PlayState extends MusicBeatState
 							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
 							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
-						}
+					}
 
 				default:
+				{
 					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
 					babyArrow.animation.addByPrefix('green', 'arrowUP');
 					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
@@ -1668,7 +1662,8 @@ class PlayState extends MusicBeatState
 							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
 							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
 							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
-						}
+					}
+				}
 			}
 
 			babyArrow.updateHitbox();
@@ -2836,7 +2831,7 @@ class PlayState extends MusicBeatState
 				pixelShitPart2 = '-pixel';
 			}
 	
-			rating.loadGraphic(Paths.image(pixelShitPart1 + daRating + pixelShitPart2));
+			rating.loadGraphic(Paths.image(daRating + pixelShitPart2));
 			rating.screenCenter();
 			rating.y -= 50;
 			rating.x = coolText.x - 125;
@@ -2902,7 +2897,7 @@ class PlayState extends MusicBeatState
 
 			if(!PlayStateChangeables.botPlay || loadRep) add(currentTimingShown);
 			
-			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image('combo' + pixelShitPart2));
 			comboSpr.screenCenter();
 			comboSpr.x = rating.x;
 			comboSpr.y = rating.y + 100;
@@ -2965,7 +2960,7 @@ class PlayState extends MusicBeatState
 			var daLoop:Int = 0;
 			for (i in seperatedScore)
 			{
-				var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+				var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image('num' + Std.int(i) + pixelShitPart2));
 				numScore.screenCenter();
 				numScore.x = rating.x + (43 * daLoop) - 50;
 				numScore.y = rating.y + 100;
@@ -3383,7 +3378,10 @@ class PlayState extends MusicBeatState
 
 			songScore -= 10;
 
-			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+			if (curSong == 'sussy')
+				FlxG.sound.play(Paths.sound('vine'));
+			else
+				FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
 
@@ -3723,7 +3721,32 @@ class PlayState extends MusicBeatState
 						gf.playAnim("scared");
 				 }
 			}
-
+		if (curSong == 'sussy')
+			{
+				switch (curStep)
+				{
+					case 480:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+						add(boyfriend);
+					case 656:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
+						add(boyfriend);
+					case 768:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+						add(boyfriend);
+					case 1088:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
+						add(boyfriend);
+					case 1183:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+						add(boyfriend);
+				}
+			}
 		#if windows
 		if (executeModchart && luaModchart != null)
 		{
