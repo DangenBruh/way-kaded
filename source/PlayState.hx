@@ -523,11 +523,11 @@ class PlayState extends MusicBeatState
 					{
 						curStage = 'sussyBg';
 
-						var bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-						bg.antialiasing = true;
-						bg.scrollFactor.set(0.2, 0.2);
-						bg.active = false;
-						add(bg);
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						add(susbg);
 					}
 				case 'MadWayBg':
 					{
@@ -3347,7 +3347,10 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.04;
+			if (curSong == 'sussy' || curSong == 'casanova')
+				health -= 0.02;
+			else
+				health -= 0.04;
 			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
@@ -3378,10 +3381,13 @@ class PlayState extends MusicBeatState
 
 			songScore -= 10;
 
-			if (curSong == 'sussy')
-				FlxG.sound.play(Paths.sound('vine'));
-			else
-				FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+			switch (curSong)
+			{
+				case 'sussy':
+					FlxG.sound.play(Paths.soundRandom('vine', 1, 3), FlxG.random.float(0.1, 0.2));
+				default:
+					FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+			}
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
 
@@ -3721,32 +3727,32 @@ class PlayState extends MusicBeatState
 						gf.playAnim("scared");
 				 }
 			}
-		if (curSong == 'sussy')
-			{
-				switch (curStep)
-				{
-					case 480:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-						add(boyfriend);
-					case 656:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
-						add(boyfriend);
-					case 768:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-						add(boyfriend);
-					case 1088:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
-						add(boyfriend);
-					case 1183:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-						add(boyfriend);
-				}
-			}
+		// if (curSong == 'sussy')
+		// 	{
+		// 		switch (curStep)
+		// 		{
+		// 			case 480:
+		// 				remove(boyfriend);
+		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+		// 				add(boyfriend);
+		// 			case 656:
+		// 				remove(boyfriend);
+		// 				boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
+		// 				add(boyfriend);
+		// 			case 768:
+		// 				remove(boyfriend);
+		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+		// 				add(boyfriend);
+		// 			case 1088:
+		// 				remove(boyfriend);
+		// 				boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
+		// 				add(boyfriend);
+		// 			case 1183:
+		// 				remove(boyfriend);
+		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
+		// 				add(boyfriend);
+		// 		}
+		// 	}
 		#if windows
 		if (executeModchart && luaModchart != null)
 		{
