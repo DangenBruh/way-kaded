@@ -1,5 +1,6 @@
 package;
 
+import MusicShit.PlaySongMetadata;
 import flixel.input.gamepad.FlxGamepad;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
@@ -179,12 +180,6 @@ class MainMenuState extends MusicBeatState
 			}
 
 			if (controls.ACCEPT)
-			{
-				if (optionShit[curSelected] == 'donate')
-				{
-					fancyOpenURL("https://soundcloud.com/gema-police4123/tittle-song-official-way-funkin-ost");
-				}
-				else
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
@@ -224,7 +219,7 @@ class MainMenuState extends MusicBeatState
 					});
 				}
 			}
-		}
+		
 
 		super.update(elapsed);
 
@@ -250,6 +245,9 @@ class MainMenuState extends MusicBeatState
 
 			case 'options':
 				FlxG.switchState(new OptionsMenu());
+			case 'donate':
+				FlxG.switchState(new MusicShit());
+				trace("the funny music button");
 		}
 	}
 
