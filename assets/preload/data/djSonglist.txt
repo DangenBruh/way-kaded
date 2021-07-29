@@ -5,8 +5,9 @@ internal,no-way,way-mad,good
 internal,sussy,bf-sus-first,bad
 internal,crewmate,crewmate,good
 internal,bonus-songs,gf,good
+internal,fun,expurgation,good
 internal,expurgation,jads,good
+internal,sunshine,way,good
 internal,animal,atsuover,good
 internal,casanova,mike,good
-internal,fun,expurgation,good
 internal,high-school-conflict,celshader,good

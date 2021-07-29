@@ -1820,7 +1820,7 @@
         "mustHitSection": true
       }
     ],
-    "player2": "way-dead",
+    "player2": "way-dead-first",
     "isHey": false,
     "cutsceneType": "none",
     "song": "sussy",

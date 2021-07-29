@@ -34,7 +34,7 @@ class OutdatedSubState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 		
-		var kadeLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('KadeEngineLogo'));
+		var kadeLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('logo static'));
 		kadeLogo.scale.y = 0.3;
 		kadeLogo.scale.x = 0.3;
 		kadeLogo.x -= kadeLogo.frameHeight;
@@ -49,7 +49,7 @@ class OutdatedSubState extends MusicBeatState
 			+ "\n\nWhat's new:\n\n"
 			+ currChanges
 			+ "\n& more changes and bugfixes in the full changelog"
-			+ "\n\nPress Space to view the full changelog and update\nor ESCAPE to ignore this",
+			+ "\nPress Enter to continue",
 			32);
 		
 		txt.setFormat("VCR OSD Mono", 32, FlxColor.fromRGB(200, 200, 200), CENTER);
@@ -86,13 +86,15 @@ class OutdatedSubState extends MusicBeatState
 	{
 		if (controls.ACCEPT)
 		{
-			fancyOpenURL("https://kadedev.github.io/Kade-Engine/changelogs/changelog-" + needVer);
-		}
-		if (controls.BACK)
-		{
+			// fancyOpenURL("https://kadedev.github.io/Kade-Engine/changelogs/changelog-" + needVer);
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
+		// if (controls.BACK)
+		// {
+		// 	leftState = true;
+		// 	FlxG.switchState(new MainMenuState());
+		// }
 		super.update(elapsed);
 	}
 }

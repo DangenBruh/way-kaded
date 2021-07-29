@@ -6,7 +6,8 @@ bf-christmas
 way
 way-angy
 way-mad
-way-dead
+way-dead-first
+way-dead-second
 way-pixel
 expurgation
 crewmate

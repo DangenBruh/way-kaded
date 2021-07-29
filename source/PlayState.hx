@@ -371,8 +371,6 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('always/alwaysDialogue'));
 			case 'no-way':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('no-way/no-wayDialogue'));
-			case 'sussy':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('sussy/sussyDialogue'));
 		}
 
 		//defaults if no stage was found in chart
@@ -639,6 +637,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-pixel';
 			case 'speakers': //i finally realized that i have to it here, cuz i have dumb
 				curGf = 'speakers';
+			case 'speakers-sus':
+				curGf = 'speakers';
 			default:
 				curGf = 'gf';
 		}
@@ -715,8 +715,8 @@ class PlayState extends MusicBeatState
 					add(evilTrail);
 				}
 			case 'sussyBg':
-				boyfriend.x = 1199;
-				boyfriend.y = 559;
+				boyfriend.x = 1181.65;
+				boyfriend.y = 596.85;
 
 				gf.x = 564.45;
 				gf.y = 274.35;
@@ -1018,8 +1018,10 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
 				case 'no-way':
-					schoolIntro(doof);
-				case 'sussy':
+					camFollow.y = 0;
+					camFollow.x = 24.65;
+					FlxG.camera.focusOn(camFollow.getPosition());
+					FlxG.camera.zoom = 0.9;
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -1467,56 +1469,54 @@ class PlayState extends MusicBeatState
 			var coolSection:Int = Std.int(section.lengthInSteps / 4);
 
 			for (songNotes in section.sectionNotes)
-			{
-				var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
-				if (daStrumTime < 0)
-					daStrumTime = 0;
-				var daNoteData:Int = Std.int(songNotes[1] % 4);
-
-				var gottaHitNote:Bool = section.mustHitSection;
-
-				if (songNotes[1] > 3)
 				{
-					gottaHitNote = !section.mustHitSection;
-				}
-
-				var oldNote:Note;
-				if (unspawnNotes.length > 0)
-					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-				else
-					oldNote = null;
-
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
-
-				if (!gottaHitNote && PlayStateChangeables.Optimize)
-					continue;
-
-				swagNote.sustainLength = songNotes[2];
-				swagNote.scrollFactor.set(0, 0);
-
+					var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
+					if (daStrumTime < 0)
+						daStrumTime = 0;
+					var daNoteData:Int = Std.int(songNotes[1] % 4);
+ 
+					var gottaHitNote:Bool = section.mustHitSection;
+ 
+					if (songNotes[1] > 3)
+					{
+						gottaHitNote = !section.mustHitSection;
+					}
+ 
+					var oldNote:Note;
+					if (unspawnNotes.length > 0)
+						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+					else
+						oldNote = null;
+ 
+					var daType = songNotes[3];
+					var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, daType);
+					swagNote.sustainLength = songNotes[2];
+ 
+					swagNote.scrollFactor.set(0, 0);	
+ 
 				var susLength:Float = swagNote.sustainLength;
-
+ 
 				susLength = susLength / Conductor.stepCrochet;
 				unspawnNotes.push(swagNote);
-
+ 
 				for (susNote in 0...Math.floor(susLength))
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-
+ 
 					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
-
+ 
 					sustainNote.mustPress = gottaHitNote;
-
+ 
 					if (sustainNote.mustPress)
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
 					}
 				}
-
+ 
 				swagNote.mustPress = gottaHitNote;
-
+ 
 				if (swagNote.mustPress)
 				{
 					swagNote.x += FlxG.width / 2; // general offset
@@ -1527,6 +1527,7 @@ class PlayState extends MusicBeatState
 			}
 			daBeats += 1;
 		}
+ 
 
 		// trace(unspawnNotes.length);
 		// playerCounter += 1;
@@ -2507,26 +2508,17 @@ class PlayState extends MusicBeatState
 							}
 							else
 							{
-								if (loadRep && daNote.isSustainNote)
-								{
-									// im tired and lazy this sucks I know i'm dumb
-									if (findByTime(daNote.strumTime) != null)
-										totalNotesHit += 1;
-									else
+								if (daNote.noteType == 2)
+									{
+										health += 0.01;
+									}
+								if (daNote.noteType == 1 || daNote.noteType == 0)
 									{
 										health -= 0.075;
 										vocals.volume = 0;
 										if (theFunne)
 											noteMiss(daNote.noteData, daNote);
 									}
-								}
-								else
-								{
-									health -= 0.075;
-									vocals.volume = 0;
-									if (theFunne)
-										noteMiss(daNote.noteData, daNote);
-								}
 							}
 		
 							daNote.visible = false;
@@ -2694,7 +2686,7 @@ class PlayState extends MusicBeatState
 					switch (curSong)
 					{
 						case 'always':
-							if (accuracy <= 60)
+							if (health <= 1)
 								FlxG.switchState(new EndingState());
 							else
 								LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene2.webm",new PlayState()));
@@ -2771,38 +2763,66 @@ class PlayState extends MusicBeatState
 
 			switch(daRating)
 			{
-				case 'shit':
-					score = -300;
-					combo = 0;
-					misses++;
-					health -= 0.2;
-					ss = false;
-					shits++;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit -= 1;
-				case 'bad':
-					daRating = 'bad';
-					score = 0;
-					health -= 0.06;
-					ss = false;
-					bads++;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 0.50;
-				case 'good':
-					daRating = 'good';
-					score = 200;
-					ss = false;
-					goods++;
-					if (health < 2)
-						health += 0.04;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 0.75;
-				case 'sick':
-					if (health < 2)
-						health += 0.1;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 1;
-					sicks++;
+					case 'shit':
+						if (daNote.noteType == 2)
+							{
+								health -= 0.1;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								score = -300;
+								combo = 0;
+								misses++;
+								health -= 0.2;
+								ss = false;
+								shits++;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.25;
+							}
+					case 'bad':
+						if (daNote.noteType == 2)
+							{
+								health -= 0.3;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								daRating = 'bad';
+								score = 0;
+								health -= 0.06;
+								ss = false;
+								bads++;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.50;
+							}
+					case 'good':
+						if (daNote.noteType == 2)
+							{
+								health -= 0.5;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								daRating = 'good';
+								score = 200;
+								ss = false;
+								goods++;
+								if (health < 2)
+									health += 0.04;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.75;
+							}
+					case 'sick':
+						if (daNote.noteType == 2)
+							{
+								health -= 0.7;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								if (health < 2)
+									health += 0.1;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 1;
+								sicks++;	
+							}					
 			}
 
 			// trace('Wife accuracy loss: ' + wife + ' | Rating: ' + daRating + ' | Score: ' + score + ' | Weight: ' + (1 - wife));
@@ -3727,32 +3747,127 @@ class PlayState extends MusicBeatState
 						gf.playAnim("scared");
 				 }
 			}
-		// if (curSong == 'sussy')
-		// 	{
-		// 		switch (curStep)
-		// 		{
-		// 			case 480:
-		// 				remove(boyfriend);
-		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-		// 				add(boyfriend);
-		// 			case 656:
-		// 				remove(boyfriend);
-		// 				boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
-		// 				add(boyfriend);
-		// 			case 768:
-		// 				remove(boyfriend);
-		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-		// 				add(boyfriend);
-		// 			case 1088:
-		// 				remove(boyfriend);
-		// 				boyfriend = new Boyfriend(1174.55, 571.1, 'bf-sus-first');
-		// 				add(boyfriend);
-		// 			case 1183:
-		// 				remove(boyfriend);
-		// 				boyfriend = new Boyfriend(1180.75, 607.85, 'bf-sus-second');
-		// 				add(boyfriend);
-		// 		}
-		// 	}
+		if (curSong == 'sussy')
+			{
+				switch (curStep)
+				{
+					case 480:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1223.95, 594.35, 'bf-sus-second');
+						remove(gf);
+						remove(dad);
+						// dad = new Character(259.9, 900.05, 'way-dead-second');
+
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						remove(susbg);
+
+						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
+						sus2bg.antialiasing = true;
+						sus2bg.scrollFactor.set(1, 1);
+						sus2bg.active = false;
+
+						add(sus2bg);
+
+						add(gf);
+						add(dad);
+						add(boyfriend);
+					case 656:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1181.65, 596.85, 'bf-sus-first');
+						remove(gf);
+						// gf = new Character(564.45, 274.35, 'speakers');
+						remove(dad);
+						// dad = new Character(259.9, 900.05, 'way-dead-first');
+
+						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
+						sus2bg.antialiasing = true;
+						sus2bg.scrollFactor.set(1, 1);
+						sus2bg.active = false;
+
+						remove(sus2bg);
+
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						
+						add(susbg);
+
+						add(gf);
+						add(dad);
+						add(boyfriend);
+					case 768:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1223.95, 594.35, 'bf-sus-second');
+						remove(gf); 
+						remove(dad);
+
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						remove(susbg);
+
+						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
+						sus2bg.antialiasing = true;
+						sus2bg.scrollFactor.set(1, 1);
+						sus2bg.active = false;
+
+						add(sus2bg);
+
+						add(gf);
+						add(dad);
+						add(boyfriend);
+					case 1088:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1181.65, 596.85, 'bf-sus-first');
+						remove(gf); 
+						remove(dad);
+
+						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
+						sus2bg.antialiasing = true;
+						sus2bg.scrollFactor.set(1, 1);
+						sus2bg.active = false;
+
+						remove(sus2bg);
+
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						
+						add(susbg);
+
+						add(gf);
+						add(dad);
+						add(boyfriend);
+					case 1183:
+						remove(boyfriend);
+						boyfriend = new Boyfriend(1223.95, 594.35, 'bf-sus-second');
+						remove(gf); 
+						remove(dad);
+						
+						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
+						susbg.antialiasing = true;
+						susbg.scrollFactor.set(1, 1);
+						susbg.active = false;
+						remove(susbg);
+
+						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
+						sus2bg.antialiasing = true;
+						sus2bg.scrollFactor.set(1, 1);
+						sus2bg.active = false;
+
+						add(sus2bg);
+
+						add(gf);
+						add(dad);
+						add(boyfriend);
+				}
+			}
 		#if windows
 		if (executeModchart && luaModchart != null)
 		{

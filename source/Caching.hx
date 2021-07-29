@@ -87,12 +87,17 @@ class Caching extends MusicBeatState
 
         trace("caching images...");
 
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images")))
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
         {
             images.push(i);
         }
 
         for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/videos")))
+        {
+            images.push(i);
+        }
+
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/way")))
         {
             images.push(i);
         }

@@ -273,6 +273,16 @@ class Character extends FlxSprite
 				addOffset('scared', -2, -17);
 
 				playAnim('danceRight');
+			case 'speakers-sus':
+				tex = Paths.getSparrowAtlas('characters/SPEAKER_assets_sus');
+				frames = tex;
+				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+
+				addOffset('danceLeft', 0, -9);
+				addOffset('danceRight', 0, -9);
+
+				playAnim('danceRight');
 			case 'bf-rtx':
 				var tex = Paths.getSparrowAtlas('characters/BFRTX');
 				frames = tex;
@@ -320,10 +330,14 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -38, -7);
 				addOffset("singLEFT", 12, -6);
 				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -40, -19);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", -45, 36);
-				addOffset("singDOWNmiss", -19, -20);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -38, -7);
+				addOffset("singLEFTmiss", 12, -6);
+				addOffset("singDOWNmiss", -10, -50);
+				// addOffset("singUPmiss", -40, -19);
+				// addOffset("singRIGHTmiss", -30, 21);
+				// addOffset("singLEFTmiss", -45, 36);
+				// addOffset("singDOWNmiss", -19, -20);
 				addOffset("hit", 7, 4);
 
 				playAnim('idle');
@@ -403,7 +417,7 @@ class Character extends FlxSprite
 					
 				playAnim('idle');
 
-			case 'way-dead': //dedway adventure
+			case 'way-dead-first': //dedway adventure
 				frames = Paths.getSparrowAtlas('characters/dedway');
 				animation.addByPrefix('idle', 'dedway', 24, false);
 				animation.addByPrefix('singUP', 'dedway', 24, false);
@@ -419,6 +433,21 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
+			case 'way-dead-second': //dedway adventure part two
+				frames = Paths.getSparrowAtlas('characters/dedway_sus');
+				animation.addByPrefix('idle', 'dedway', 24, false);
+				animation.addByPrefix('singUP', 'dedway', 24, false);
+				animation.addByPrefix('singDOWN', 'dedway', 24, false);
+				animation.addByPrefix('singLEFT', 'dedway', 24, false);
+				animation.addByPrefix('singRIGHT', 'dedway', 24, false);
+
+				addOffset('idle', 0, 0);
+				addOffset('singUP', 0, 0);
+				addOffset('singDOWN', 0, 0);
+				addOffset('singLEFT', 0, 0);
+				addOffset('singRIGHT', 0, 0);
+
+				playAnim('idle');
 			case 'expurgation':
 				frames = Paths.getSparrowAtlas('characters/expurgation');
 				animation.addByPrefix('idle', 'idle', 24, false);
@@ -570,6 +599,16 @@ class Character extends FlxSprite
 							playAnim('danceLeft');
 					}
 				case 'speakers':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+				case 'speakers-sus':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
