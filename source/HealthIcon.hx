@@ -41,6 +41,7 @@ class HealthIcon extends FlxSprite
 		animation.add('mike', [35, 35], 0, false, isPlayer);
 		animation.add('celshader', [36, 36], 0, false, isPlayer);
 		animation.add('crewmate', [30, 31], 0, false, isPlayer);
+		animation.add('mark-bs', [11, 12], 0, false, isPlayer);
 		animation.play(char);
 
 		switch(char)

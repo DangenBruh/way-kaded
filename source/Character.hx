@@ -498,6 +498,21 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				antialiasing = false;
+			case 'mark-bs':
+				frames = Paths.getSparrowAtlas('bs/mark-bs');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+
+				addOffset('idle', 0, 0);
+				addOffset('singUP', 0, 4);
+				addOffset('singRIGHT', -21, 0);
+				addOffset('singLEFT', 8, -2);
+				addOffset('singDOWN', -9, -16);
+
+				playAnim('idle');
 		}
 
 		dance();
