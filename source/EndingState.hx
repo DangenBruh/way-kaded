@@ -9,18 +9,13 @@ import flixel.util.FlxTimer;
 class EndingState extends FlxState
 
 {
-	// private var _accuracy:Float = 0.00;
-	// private var _curSong:String = "";
-
 	var _badEnding:Bool = false;
 	
 
-	public function new(badEnding:Bool = true)//curSong:String, accuracy:Float, 
+	public function new(badEnding:Bool = true)
 	{
 		super();
 		_badEnding = badEnding;
-		// _curSong = curSong;
-		// _accuracy = accuracy;
 	};
 	
 	override public function create():Void
@@ -32,21 +27,7 @@ class EndingState extends FlxState
 			end.loadGraphic(Paths.image("badending"));
 			FlxG.sound.playMusic(Paths.music("badending"),1,false);
 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-			// 	}
-			// else
-			// 	FlxG.switchState(new StoryMenuState());
 		}
-		// if (PlayState.curSong == 'way')
-		// {
-		// 	if(PlayState.accuracy < 65)
-		// 		{
-		// 			end.loadGraphic(Paths.image("goodending"));
-		// 			FlxG.sound.playMusic(Paths.music("freakyMenu"),1,false);
-		// 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-		// 		}
-		// 	else
-		// 		FlxG.switchState(new StoryMenuState());
-		// }
 		else
 		{
 			FlxG.switchState(new StoryMenuState());

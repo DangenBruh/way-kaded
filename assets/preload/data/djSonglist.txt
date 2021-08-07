@@ -11,3 +11,4 @@ internal,sunshine,way,good
 internal,animal,atsuover,good
 internal,casanova,mike,good
 internal,high-school-conflict,celshader,good
+internal,guns,way,good

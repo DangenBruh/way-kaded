@@ -30,7 +30,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
-	// var portraitM:FlxSprite;
+	var portraitGf:FlxSprite;
 
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
@@ -41,12 +41,6 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
-				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'thorns':
-				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'no-way':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
@@ -72,31 +66,6 @@ class DialogueBox extends FlxSpriteGroup
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
-			case 'roses':
-				hasDialog = true;
-				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
-
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
-				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
-				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
-
-			case 'thorns':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
-				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
-				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
-
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
-				face.setGraphicSize(Std.int(face.width * 6));
-				add(face);
-
-			// order of songs doesn't matter!
-
 			case 'way':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
@@ -118,12 +87,20 @@ class DialogueBox extends FlxSpriteGroup
 				box.y = 371.25;
 
 			case 'no-way':
-				hasDialog = true;
-				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
-				box.animation.addByPrefix('normalOpen', 'speech bubble loud open', 24, false);
-				box.animation.addByPrefix('normal', 'AHH speech bubble', 10, true);
-				box.x = 37.05;
-				box.y = 301.65;
+				// if(portraitLeft.visible)
+					hasDialog = true;
+					box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+					box.animation.addByPrefix('normalOpen', 'speech bubble loud open', 24, false);
+					box.animation.addByPrefix('normal', 'AHH speech bubble', 10, true);
+					box.x = 37.05;
+					box.y = 301.65;
+				// if(portraitRight.visible || portraitGf.visible)
+				// 	hasDialog = true;
+				// 	box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
+				// 	box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				// 	box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				// 	box.x = 63;
+				// 	box.y = 371.25;
 
 			// case 'sussy':
 			// 	hasDialog = true;
@@ -147,6 +124,23 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeft.updateHitbox();
 				portraitLeft.scrollFactor.set();
 				add(portraitLeft);
+				portraitLeft.visible = false;
+
+				portraitRight = new FlxSprite(699.35, 207.3);
+				portraitRight.frames = Paths.getSparrowAtlas('portraits/bf', 'way');
+				portraitRight.animation.addByPrefix('enter', 'bf enter', 24, false);
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+				portraitRight.visible = false;
+
+				portraitGf = new FlxSprite(400.2, 137.9);
+				portraitGf.frames = Paths.getSparrowAtlas('portraits/gf', 'way');
+				portraitGf.animation.addByPrefix('enter', 'GF Dancing Beat', 24, true);
+				portraitGf.updateHitbox();
+				portraitGf.scrollFactor.set();
+				add(portraitGf);
+				portraitGf.visible = false;
 			}
 		else if (PlayState.SONG.song.toLowerCase() == 'always' || PlayState.SONG.song.toLowerCase() == 'no-way')
 			{
@@ -156,6 +150,23 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeft.updateHitbox();
 				portraitLeft.scrollFactor.set();
 				add(portraitLeft);
+				portraitLeft.visible = false;
+
+				portraitRight = new FlxSprite(699.35, 207.3);
+				portraitRight.frames = Paths.getSparrowAtlas('portraits/bf', 'way');
+				portraitRight.animation.addByPrefix('enter', 'bf enter', 24, false);
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+				portraitRight.visible = false;
+
+				portraitGf = new FlxSprite(400.2, 137.9);
+				portraitGf.frames = Paths.getSparrowAtlas('portraits/gf', 'way');
+				portraitGf.animation.addByPrefix('enter', 'GF Dancing Beat', 24, true);
+				portraitGf.updateHitbox();
+				portraitGf.scrollFactor.set();
+				add(portraitGf);
+				portraitGf.visible = false;
 			}
 		if (PlayState.SONG.song.toLowerCase() == 'way' || PlayState.SONG.song.toLowerCase() == 'always' || PlayState.SONG.song.toLowerCase() == 'no-way')
 			{
@@ -165,15 +176,24 @@ class DialogueBox extends FlxSpriteGroup
 				portraitRight.updateHitbox();
 				portraitRight.scrollFactor.set();
 				add(portraitRight);
+				portraitRight.visible = false;
+
+				portraitGf = new FlxSprite(400.2, 137.9);
+				portraitGf.frames = Paths.getSparrowAtlas('portraits/gf', 'way');
+				portraitGf.animation.addByPrefix('enter', 'GF Dancing Beat', 24, true);
+				portraitGf.updateHitbox();
+				portraitGf.scrollFactor.set();
+				add(portraitGf);
+				portraitGf.visible = false;
 			}
 		// else if (PlayState.SONG.song.toLowerCase() == 'way' || PlayState.SONG.song.toLowerCase() == 'always' || PlayState.SONG.song.toLowerCase() == 'no-way')
 		// 	{
-		// 		portraitM = new FlxSprite(400.2, 137.9);
-		// 		portraitM.frames = Paths.getSparrowAtlas('portraits/gf', 'way');
-		// 		portraitM.animation.addByPrefix('enter', 'GF Dancing Beat', 24, false);
-		// 		portraitM.updateHitbox();
-		// 		portraitM.scrollFactor.set();
-		// 		add(portraitM);
+		// 		portraitGf = new FlxSprite(400.2, 137.9);
+		// 		portraitGf.frames = Paths.getSparrowAtlas('portraits/gf', 'way');
+		// 		portraitGf.animation.addByPrefix('enter', 'GF Dancing Beat', 24, true);
+		// 		portraitGf.updateHitbox();
+		// 		portraitGf.scrollFactor.set();
+		// 		add(portraitGf);
 		// 	}
 		
 		box.animation.play('normalOpen');
@@ -184,10 +204,10 @@ class DialogueBox extends FlxSpriteGroup
 		// add(handSelect);
 
 
-		if (!talkingRight)
-		{
-			//box.flipX = true;
-		}
+		// if(portraitLeft.visible = true)
+		// {
+		// 	box.flipX = true;
+		// }
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
@@ -296,7 +316,7 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'dad':
 				portraitRight.visible = false;
-				// portraitM.visible = false;
+				portraitGf.visible = false;
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
@@ -305,21 +325,21 @@ class DialogueBox extends FlxSpriteGroup
 					
 			case 'bf':
 				portraitLeft.visible = false;
-				// portraitM.visible = false;
+				portraitGf.visible = false;
 				if (!portraitRight.visible)
 				{
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
 				}
 					
-			// case 'gf':
-			// 	portraitLeft.visible = false;
-			// 	portraitRight.visible = false;
-			// 	if (!portraitM.visible)
-			// 	{
-			// 		portraitM.visible = true;
-			// 	}
-			// 		portraitM.animation.play('enter');
+			case 'gf':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				if (!portraitGf.visible)
+				{
+					portraitGf.visible = true;
+					portraitGf.animation.play('enter');
+				}
 		}
 	}
 

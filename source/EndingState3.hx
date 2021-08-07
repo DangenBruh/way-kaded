@@ -9,47 +9,28 @@ import flixel.util.FlxTimer;
 class EndingState3 extends FlxState
 
 {
-	// private var _accuracy:Float = 0.00;
-	// private var _curSong:String = "";
-
-	var _susEnding:Bool = false;
+	var _badEnding:Bool = false;
 	
 
-	public function new(susEnding:Bool = true)//curSong:String, accuracy:Float, 
+	public function new(badEnding:Bool = true)
 	{
 		super();
-		_susEnding = susEnding;
-		// _curSong = curSong;
-		// _accuracy = accuracy;
+		_badEnding = badEnding;
 	};
 	
 	override public function create():Void
 	{
 		super.create();
 		var end:FlxSprite = new FlxSprite(0, 0);
-		if (_susEnding)
+		if (_badEnding)
 		{
 			end.loadGraphic(Paths.image("susending"));
 			FlxG.sound.playMusic(Paths.music("susending"),1,false);
 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-			// 	}
-			// else
-			// 	FlxG.switchState(new StoryMenuState());
 		}
-		// if (PlayState.curSong == 'way')
-		// {
-		// 	if(PlayState.accuracy < 65)
-		// 		{
-		// 			end.loadGraphic(Paths.image("goodending"));
-		// 			FlxG.sound.playMusic(Paths.music("freakyMenu"),1,false);
-		// 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-		// 		}
-		// 	else
-		// 		FlxG.switchState(new StoryMenuState());
-		// }
 		else
 		{
-			FlxG.switchState(new StoryMenuState());
+			FlxG.switchState(new FreeplayState());
 		}
 		add(end);
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
@@ -72,7 +53,7 @@ class EndingState3 extends FlxState
 	
 	public function endIt(e:FlxTimer=null){
 		trace("ENDING");
-		FlxG.switchState(new StoryMenuState());
+		FlxG.switchState(new FreeplayState());
 	}
 	
 }

@@ -342,29 +342,6 @@ class PlayState extends MusicBeatState
 		//dialogue shit
 		switch (songLowercase)
 		{
-			case 'tutorial':
-				dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
-			case 'bopeebo':
-				dialogue = [
-					'HEY!',
-					"You think you can just sing\nwith my daughter like that?",
-					"If you want to date her...",
-					"You're going to have to go \nthrough ME first!"
-				];
-			case 'fresh':
-				dialogue = ["Not too shabby boy.", ""];
-			case 'dadbattle':
-				dialogue = [
-					"gah you think you're hot stuff?",
-					"If you can beat me here...",
-					"Only then I will even CONSIDER letting you\ndate my daughter!"
-				];
-			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('senpai/senpaiDialogue'));
-			case 'roses':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
-			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
 			case 'way':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('way/wayDialogue'));
 			case 'always':
@@ -896,7 +873,19 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
+		switch(curSong)
+		{
+			case 'way':
+				healthBar.createFilledBar(0xFF331919, 0xFF22BBE6);
+			case 'always':
+				healthBar.createFilledBar(0xFF590E0E, 0xFF22BBE6);
+			case 'no-way':
+				healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
+			case 'sussy':
+				healthBar.createFilledBar(0xFF000000, 0xFFB0CCD4);
+			default:
+				healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
+		}
 		// healthBar
 		add(healthBar);
 
@@ -2691,14 +2680,16 @@ class PlayState extends MusicBeatState
 							else
 								LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene2.webm",new PlayState()));
 						case 'sussy':
-							if (accuracy >= 60)
-								FlxG.switchState(new EndingState3());
+							if (health <= 1)
+								FlxG.switchState(new EndingState());
 							else
-								FlxG.switchState(new FreeplayState());
+								LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene2.webm",new PlayState()));
 						case 'no-way':
 							if (accuracy <= 85)
 								FlxG.switchState(new EndingState2());
-						}
+							else
+								LoadingState.loadAndSwitchState(new VideoState("assets/videos/cutscene3.webm",new PlayState()));
+					}
 
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;

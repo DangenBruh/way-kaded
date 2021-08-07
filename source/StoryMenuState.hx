@@ -26,7 +26,7 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['way', 'always', 'no-way', 'sussy']
+		['way', 'always', 'no-way', 'sussy', 'ignore-me-lol-haha-the-endings-dont-work-without-this-hahahaha-pain']
 	];
 	var curDifficulty:Int = 1;
 
@@ -90,7 +90,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
+		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF51B6F9);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
