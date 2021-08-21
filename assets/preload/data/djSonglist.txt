@@ -4,11 +4,12 @@ internal,always,way-angy,good
 internal,no-way,way-mad,good
 internal,sussy,bf-sus-first,bad
 internal,crewmate,crewmate,good
-internal,bonus-songs,gf,good
+internal,bonus-songs,test,good
 internal,fun,expurgation,good
 internal,expurgation,jads,good
-internal,sunshine,way,good
+internal,sunshine,phlox,good
 internal,animal,atsuover,good
 internal,casanova,mike,good
 internal,high-school-conflict,celshader,good
-internal,guns,way,good
+internal,power-link,crewmate,good
+internal,guns,kawaisprite,good

@@ -3,6 +3,17 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxAxes;
+import flixel.util.FlxColor;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -12,12 +23,17 @@ class GameOverSubstate extends MusicBeatSubstate
 	var bf:Boyfriend;
 	var camFollow:FlxObject;
 
+	public var space:FlxText = new FlxText(0,600,0,"Press Space to gain health when you need it",32);
+
 	var stageSuffix:String = "";
 
 	public function new(x:Float, y:Float)
 	{
 		var daStage = PlayState.curStage;
 		var daBf:String = '';
+
+		space.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0, 2, 1);
+
 		switch (PlayState.SONG.player1)
 		{
 			case 'bf-pixel':
@@ -25,6 +41,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf-pixel-dead';
 			default:
 				daBf = 'bf';
+
+				space.scrollFactor.set();
+				space.screenCenter(FlxAxes.X);
+				new FlxTimer().start(0.5, function(e:FlxTimer){
+					add(space);
+				});
 		}
 
 		super();

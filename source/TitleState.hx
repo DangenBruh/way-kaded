@@ -329,16 +329,18 @@ class TitleState extends MusicBeatState
 						OutdatedSubState.needVer = returnedData[0];
 						OutdatedSubState.currChanges = returnedData[1];
 						FlxG.switchState(new OutdatedSubState());
+						piracylol();
 					}
 					else
 					{
 						FlxG.switchState(new MainMenuState());
+						piracylol();
 					}
 				}
 				
 				http.onError = function (error) {
 				  trace('error: $error');
-				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
+				  piracylol();
 				}
 				
 				http.request();
@@ -352,6 +354,14 @@ class TitleState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+	}
+
+	function piracylol(){
+		#if desktop
+		 FlxG.switchState(new MainMenuState());
+		#else
+		 FlxG.switchState(new PiracyScreen());
+		#end
 	}
 
 	function createCoolText(textArray:Array<String>)

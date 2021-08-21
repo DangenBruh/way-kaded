@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="way ver angry.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="way mad 30000" x="5" y="5" width="489" height="245" frameX="-61" frameY="-20" frameWidth="569" frameHeight="306"/>
+	<SubTexture name="way mad 30001" x="5" y="265" width="489" height="244" frameX="-60" frameY="0" frameWidth="569" frameHeight="306"/>
+	<SubTexture name="way mad 30002" x="5" y="265" width="489" height="244" frameX="-80" frameY="-21" frameWidth="569" frameHeight="306"/>
+	<SubTexture name="way mad 30003" x="5" y="5" width="489" height="245" frameX="-41" frameY="-61" frameWidth="569" frameHeight="306"/>
+	<SubTexture name="way mad 30004" x="5" y="5" width="489" height="245" frameX="0" frameY="-20" frameWidth="569" frameHeight="306"/>
+	<SubTexture name="way mad 30005" x="5" y="265" width="489" height="244" frameX="-19" frameY="-21" frameWidth="569" frameHeight="306"/>
+</TextureAtlas>

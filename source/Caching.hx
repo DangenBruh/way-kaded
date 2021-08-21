@@ -108,18 +108,11 @@ class Caching extends MusicBeatState
         {
             music.push(i);
         }
-
+        
         toBeDone = Lambda.count(images) + Lambda.count(music);
 
         trace("LOADING: " + toBeDone + " OBJECTS.");
 
-        for (i in images)
-        {
-            var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
-            trace("cached " + replaced);
-            done++;
-        }
 
         for (i in music)
         {

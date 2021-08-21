@@ -34,6 +34,7 @@ class OptionsMenu extends MusicBeatState
 			new FPSCapOption("Cap your FPS"),
 			#end
 			new ScrollSpeedOption("Change your scroll speed (1 = Chart dependent)"),
+			new HealsOption("Press Space to heal"),
 			new AccuracyDOption("Change how accuracy is calculated. (Accurate = Simple, Complex = Milisecond Based)"),
 			new ResetButtonOption("Toggle pressing R to gameover."),
 			// new OffsetMenu("Get a note offset based off of your inputs!"),

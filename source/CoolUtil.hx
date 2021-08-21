@@ -8,9 +8,16 @@ class CoolUtil
 {
 	public static var difficultyArray:Array<String> = ['Easy', "Normal", "Hard"];
 
+	public static var healsArray:Array<String> = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ,'10'];
+
 	public static function difficultyFromInt(difficulty:Int):String
 	{
 		return difficultyArray[difficulty];
+	}
+
+	public static function healsInt(heals:Int):String
+	{
+		return healsArray[heals];
 	}
 
 	public static function coolTextFile(path:String):Array<String>

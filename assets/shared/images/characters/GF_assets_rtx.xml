@@ -58,6 +58,16 @@
 	<SubTexture name="GF FEAR 0002" x="3635" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
 	<SubTexture name="GF FEAR 0003" x="4362" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
 	<SubTexture name="GF FEAR 0004" x="5089" y="1361" width="699" height="640"/>
+	<!-- the fear animation is too fast, sadge -->
+	<SubTexture name="GF FEAR 0005" x="3635" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0006" x="4362" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0007" x="5089" y="1361" width="699" height="640"/>
+	<SubTexture name="GF FEAR 0008" x="3635" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0009" x="4362" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0010" x="5089" y="1361" width="699" height="640"/>
+	<SubTexture name="GF FEAR 0011" x="3635" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0012" x="4362" y="1361" width="699" height="638" frameX="0" frameY="-2" frameWidth="699" frameHeight="640"/>
+	<SubTexture name="GF FEAR 0013" x="5089" y="1361" width="699" height="640"/>
 	<SubTexture name="gf sad0000" x="5816" y="1361" width="699" height="633" frameX="0" frameY="-3" frameWidth="699" frameHeight="636"/>
 	<SubTexture name="gf sad0001" x="5816" y="1361" width="699" height="633" frameX="0" frameY="-3" frameWidth="699" frameHeight="636"/>
 	<SubTexture name="gf sad0002" x="6543" y="1361" width="699" height="636"/>

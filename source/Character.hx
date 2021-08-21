@@ -47,7 +47,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
-				addOffset('sad', -2, -2);
+				addOffset('sad', -2, -21);
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 
@@ -78,7 +78,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
-				addOffset('sad', -2, -2);
+				addOffset('sad', -2, -21);
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 
@@ -123,6 +123,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
 				animation.addByPrefix('hey', 'BF HEY', 24, false);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
@@ -237,7 +238,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
-				addOffset('sad', -2, -2);
+				addOffset('sad', -2, -21);
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 				addOffset('scared', -2, -17);
@@ -259,7 +260,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'GF FEAR', 24);
 
 				addOffset('cheer');
-				addOffset('sad', -2, -2);
+				addOffset('sad', -2, -21);
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 
@@ -385,6 +386,23 @@ class Character extends FlxSprite
 						
 				playAnim('idle');
 		
+			case 'way-flip': //way but flipped
+				frames = Paths.getSparrowAtlas('characters/way-flipped');
+				animation.addByPrefix('idle', 'way idle', 24, false);
+				animation.addByPrefix('singUP', 'way up', 24, false);
+				animation.addByPrefix('singDOWN', 'way down', 24, false);
+				animation.addByPrefix('singLEFT', 'way left', 24, false);
+				animation.addByPrefix('singRIGHT', 'way right', 24, false);
+		
+				addOffset('idle', 0, 0);
+				addOffset("singUP", -19, -56);
+				addOffset("singRIGHT", -51, 17);
+				addOffset("singLEFT", 27, 7);
+				addOffset("singDOWN", 2, -77);
+						
+				playAnim('idle');
+
+				flipX = true;
 			case 'way-angy': //he do be angy
 				frames = Paths.getSparrowAtlas('characters/wayangy');
 				animation.addByPrefix('idle', 'way idle', 24, false);

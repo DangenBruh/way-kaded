@@ -12,7 +12,8 @@ class DiscordClient
 	{
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "557069829501091850", // change this to what ever the fuck you want lol
+			// clientID: "557069829501091850", // change this to what ever the fuck you want lol
+			clientID: "876923280961986611",
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -37,10 +38,10 @@ class DiscordClient
 	static function onReady()
 	{
 		DiscordRpc.presence({
-			details: "In the Menus",
+			details: "no way holy shit im play the poggers way mod that you should totally play",
 			state: null,
-			largeImageKey: 'icon',
-			largeImageText: "fridaynightfunkin"
+			largeImageKey: 'rpc_icon',
+			largeImageText: "troll"
 		});
 	}
 
