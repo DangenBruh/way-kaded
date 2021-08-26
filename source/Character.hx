@@ -335,10 +335,6 @@ class Character extends FlxSprite
 				addOffset("singRIGHTmiss", -38, -7);
 				addOffset("singLEFTmiss", 12, -6);
 				addOffset("singDOWNmiss", -10, -50);
-				// addOffset("singUPmiss", -40, -19);
-				// addOffset("singRIGHTmiss", -30, 21);
-				// addOffset("singLEFTmiss", -45, 36);
-				// addOffset("singDOWNmiss", -19, -20);
 				addOffset("hit", 7, 4);
 
 				playAnim('idle');
@@ -435,7 +431,7 @@ class Character extends FlxSprite
 					
 				playAnim('idle');
 
-			case 'way-dead-first': //dedway adventure
+			case 'way-dead': //dedway adventure
 				frames = Paths.getSparrowAtlas('characters/dedway');
 				animation.addByPrefix('idle', 'dedway', 24, false);
 				animation.addByPrefix('singUP', 'dedway', 24, false);

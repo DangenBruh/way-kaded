@@ -75,6 +75,8 @@ using StringTools;
 
 class PlayState extends MusicBeatState
 {
+	public var redscreenshit:FlxSprite;
+
 	public static var instance:PlayState = null;
 
 	public static var curStage:String = '';
@@ -118,7 +120,6 @@ class PlayState extends MusicBeatState
 	public var originalX:Float;
 
 	public var modchartdel:FlxText = new FlxText(0,10,0,"ModChart Disabled",32);
-	public var modchartyes:FlxText = new FlxText(0,10,0,"ModChart Enabled",32);
 
 	public static var dad:Character;
 	public static var gf:Character;
@@ -163,6 +164,7 @@ class PlayState extends MusicBeatState
 
 	public var iconP1:HealthIcon; //making these public again because i may be stupid
 	public var iconP2:HealthIcon; //what could go wrong?
+	private var redscreenshitCamera:FlxCamera;
 	public var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 
@@ -324,10 +326,13 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
+		redscreenshitCamera = new FlxCamera();
+		redscreenshitCamera.bgColor.alpha = 0;
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(redscreenshitCamera);
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
@@ -347,23 +352,17 @@ class PlayState extends MusicBeatState
 		switch (songLowercase)
 		{
 			case 'way':
-				if (storyDifficulty != 2)
-					dialogue = CoolUtil.coolTextFile(Paths.txt('way/wayDialogue'));
-				else if (storyDifficulty != 3)
+				if (storyDifficulty >= 1)
 					dialogue = CoolUtil.coolTextFile(Paths.txt('way/wayDialogue'));
 				else
 					dialogue = CoolUtil.coolTextFile(Paths.txt('way/wayDialogue-easy'));
 			case 'always':
-				if (storyDifficulty != 2)
-					dialogue = CoolUtil.coolTextFile(Paths.txt('always/alwaysDialogue'));
-				else if (storyDifficulty != 3)
+				if (storyDifficulty >= 1)
 					dialogue = CoolUtil.coolTextFile(Paths.txt('always/alwaysDialogue'));
 				else
 					dialogue = CoolUtil.coolTextFile(Paths.txt('always/alwaysDialogue-easy'));
 			case 'no-way':
-				if (storyDifficulty != 2)
-					dialogue = CoolUtil.coolTextFile(Paths.txt('no-way/no-wayDialogue'));
-				else if (storyDifficulty != 3)
+				if (storyDifficulty >= 1)
 					dialogue = CoolUtil.coolTextFile(Paths.txt('no-way/no-wayDialogue'));
 				else
 					dialogue = CoolUtil.coolTextFile(Paths.txt('no-way/no-wayDialogue-easy'));
@@ -688,6 +687,7 @@ class PlayState extends MusicBeatState
 			case 'way-pixel':
 				dad.x += 150;
 				dad.y += 500;
+				tweenCamIn();
 		}
 
 
@@ -707,13 +707,13 @@ class PlayState extends MusicBeatState
 				dad.y = 467.7;
 			case 'wayBg':
 				boyfriend.x = 1308.5;
-				boyfriend.y = 624.55; //624
+				boyfriend.y = 624.55;
 
 				gf.x = 609.7;
-				gf.y = 346.15; //346
+				gf.y = 346.15;
 
 				dad.x = 257.8;
-				dad.y = 604.25; //604
+				dad.y = 604.25;
 
 				boyfriend.width = 424.8;
 				boyfriend.height = 417.7;
@@ -931,19 +931,6 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		// switch(curSong) //i dont want to change it for every single song trolled
-		// {
-		// 	case 'way':
-		// 		healthBar.createFilledBar(0xFF331919, 0xFF22BBE6);
-		// 	case 'always':
-		// 		healthBar.createFilledBar(0xFF590E0E, 0xFF22BBE6);
-		// 	case 'no-way':
-		// 		healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
-		// 	case 'sussy':
-		// 		healthBar.createFilledBar(0xFF000000, 0xFFB0CCD4);
-		// 	default:
-		// 		healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
-		// }
 		switch(dad.curCharacter)
 		{
 			case 'way':
@@ -954,7 +941,7 @@ class PlayState extends MusicBeatState
 				healthBar.createFilledBar(0xFFFF0000, 0xFF22BBE6);
 			case 'expurgation':
 				healthBar.createFilledBar(0xFFFF2929, 0xFF593DD9);
-			case 'way-dead-first':
+			case 'way-dead':
 				healthBar.createFilledBar(0xFF000000, 0xFFB0CCD4);
 			case 'way-dead-second': //i regret making a second one you cant even see it
 				healthBar.createFilledBar(0xFF2B0000, 0xFFB0CCD4); //at least there will be a difference
@@ -972,8 +959,8 @@ class PlayState extends MusicBeatState
 		}
 		add(healthBar);
 
-		// Add Kade Engine watermark //no lol
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
+		// Add Kade Engine watermark //bruh
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (" | KE " + "1.69"), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -981,7 +968,7 @@ class PlayState extends MusicBeatState
 		if (PlayStateChangeables.useDownscroll)
 			kadeEngineWatermark.y = FlxG.height * 0.9 + 45;
 
-		scoreTxt = new FlxText(FlxG.width / 2 - 235, healthBarBG.y + 50, 0, "", 20);
+	    scoreTxt = new FlxText(FlxG.width / 2 - 235, healthBarBG.y + 50, 0, "", 20);
 
 		scoreTxt.screenCenter(X);
 
@@ -1100,6 +1087,16 @@ class PlayState extends MusicBeatState
 					startCountdown();
 			}
 		}
+
+		redscreenshit = new FlxSprite().loadGraphic(Paths.image('bfdyinglol'));
+		redscreenshit.width = 1280;
+		redscreenshit.height = 720;
+		redscreenshit.x = 0;
+		redscreenshit.y = 0;
+		redscreenshit.updateHitbox();
+		add(redscreenshit);
+		redscreenshit.cameras = [redscreenshitCamera];
+		redscreenshit.alpha = 1;
 
 		if (!loadRep)
 			rep = new Replay("na");
@@ -1853,6 +1850,19 @@ class PlayState extends MusicBeatState
 		#if !debug
 		perfectMode = false;
 		#end
+
+		if (SONG.song.toLowerCase() == 'no-way' && storyDifficulty >= 2) //totally not copying tabis code
+		{
+			redscreenshit.alpha = 1 - (health / 3);
+		}
+		else if (SONG.song.toLowerCase() == 'no-way') //but actually thank you Gweb
+		{
+			redscreenshit.alpha = 1 - (health / 2);
+		}
+		else
+		{
+			redscreenshit.alpha = 0;
+		}
 
 		if (PlayStateChangeables.botPlay && FlxG.keys.justPressed.ONE)
 			camHUD.visible = !camHUD.visible;
@@ -2665,14 +2675,14 @@ class PlayState extends MusicBeatState
 										health -= 0.01;
 								case 'way-mad':
 									if (health > 1)
-										health -= 0.02;
+										health -= 0.05;
 									else
-										health -= 0.01;
+										health -= 0.02;
 								case 'expurgation':
 									if (health > 0.8)
-										health -= 0.02;
+										health -= 0.08;
 									else
-										health -= 0.005;
+										health -= 0.003;
 									gf.playAnim('scared');
 								case 'bf-pixel':
 									if (health > 0.1)
@@ -2685,9 +2695,9 @@ class PlayState extends MusicBeatState
 							{
 								case 'expurgation':
 									if (health > 1)
-										health -= 0.008;
+										health -= 0.04;
 									else
-										health -= 0.003;
+										health -= 0.01;
 									gf.playAnim('scared');
 								case 'bf-pixel':
 									if (health > 0.5)
@@ -2943,35 +2953,37 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('Lights_Shut_off'));
 					}
 
-					// switch (curSong)
-					// {
-					// 	case 'always':
-					// 	{
-					// 		if (health <= 1)
-					// 		{
-					// 			FlxG.switchState(new EndingState());
-					// 		}
-					// 		else
-					// 		{
-					// 			LoadingState.loadAndSwitchState(new VideoState("assets/videos/anger.webm",new PlayState()));
-					// 		}
-					// 	}
-					// 	case 'sussy':
-					// 	{
-					// 		FlxG.switchState(new EndingState3());
-					// 	}
-					// 	case 'no-way':
-					// 	{
-					// 		if (accuracy <= 85)
-					// 		{
-					// 			FlxG.switchState(new EndingState2());
-					// 		}
-					// 		else
-					// 		{
-					// 			LoadingState.loadAndSwitchState(new VideoState("assets/videos/sussy.webm",new PlayState()));
-					// 		}
-					// 	}
-					// }
+					function loadplayState(){
+						LoadingState.loadAndSwitchState(new PlayState(), true);
+					}
+
+					switch (curSong)
+					{
+						case 'always':
+						{
+							if (health <= 1)
+							{
+								FlxG.switchState(new EndingState());
+							}
+							else
+							{
+								FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+									FlxG.switchState(new VideoState('assets/videos/always/anger.webm', loadplayState));
+								});
+							}
+						}
+						case 'no-way':
+						{
+							if (accuracy <= 85)
+							{
+								FlxG.switchState(new EndingState2());
+							}
+							else
+							{
+								FlxG.switchState(new VideoState('assets/videos/sussy.webm', loadplayState));
+							}
+						}
+					}
 
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;
@@ -2994,10 +3006,11 @@ class PlayState extends MusicBeatState
 				FlxG.sound.music.stop();
 				vocals.stop();
 
-				if (FlxG.save.data.scoreScreen)
-					openSubState(new ResultsScreen());
-				else
-					FlxG.switchState(new FreeplayState());
+				// if (FlxG.save.data.scoreScreen)
+				// 	openSubState(new ResultsScreen());
+				// else
+				// 	FlxG.switchState(new FreeplayState());
+				FlxG.switchState(new FreeplayState());
 			}
 		}
 	}
@@ -3640,7 +3653,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			if (curSong == 'sussy' || curSong == 'casanova')
+			if (curSong == 'casanova')
 				health -= 0.02;
 			else
 				health -= 0.04;
@@ -3674,13 +3687,7 @@ class PlayState extends MusicBeatState
 
 			songScore -= 10;
 
-			switch (curSong)
-			{
-				case 'sussy':
-					FlxG.sound.play(Paths.soundRandom('vine', 1, 3), FlxG.random.float(0.1, 0.2));
-				default:
-					FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			}
+			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
 			// FlxG.log.add('played imss note');
 
@@ -4012,125 +4019,43 @@ class PlayState extends MusicBeatState
 				switch (curStep)
 				{
 					case 481:
+					{
 						boyfriend.playAnim("hit");
 						gf.playAnim("scared");
-						health -= 0.5;
+						if (health > 1.3)
+							health = 1;
+						else
+							health -= 0.3;
+					}
 					case 925:
+					{
 						boyfriend.playAnim("hit");
 						gf.playAnim("scared");
-						health -= 0.5;
+						if (health > 1.3)
+							health = 1;
+						else
+							health -= 0.5;
+					}
 				 }
 			}
-			if (curSong == 'sussy')
+		}
+		else
+		{
+			switch (curStep)
 			{
-				switch (curStep)
+				case 481:
 				{
-					case 480:
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1223.95, 594.35, 'bf-sus-second');
-						remove(gf);
-						var evilTrailbf = new FlxTrail(boyfriend, null, 1, 24, 0.3, 0.069);
-						remove(dad);
-						// dad = new Character(259.9, 900.05, 'way-dead-second');
-
-						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-						susbg.antialiasing = true;
-						susbg.scrollFactor.set(1, 1);
-						susbg.active = false;
-						remove(susbg);
-
-						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
-						sus2bg.antialiasing = true;
-						sus2bg.scrollFactor.set(1, 1);
-						sus2bg.active = false;
-
-						add(sus2bg);
-
-						add(evilTrailbf);
-						add(gf);
-						add(dad);
-						add(boyfriend);
-					case 656:
-						var evilTrailbf = new FlxTrail(boyfriend, null, 1, 24, 0.3, 0.069);
-						evilTrailbf.alpha = 1;
-						FlxTween.tween(evilTrailbf, {alpha: 0, y: evilTrailbf.y - 5}, 1, {ease: FlxEase.quartInOut, startDelay: 0.7});
-						remove(evilTrailbf);
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1181.65, 596.85, 'bf-sus-first');
-						remove(gf);
-						// gf = new Character(564.45, 274.35, 'speakers');
-						remove(dad);
-						// dad = new Character(259.9, 900.05, 'way-dead-first');
-
-						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
-						sus2bg.antialiasing = true;
-						sus2bg.scrollFactor.set(1, 1);
-						sus2bg.active = false;
-
-						remove(sus2bg);
-
-						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-						susbg.antialiasing = true;
-						susbg.scrollFactor.set(1, 1);
-						susbg.active = false;
-						
-						add(susbg);
-
-						add(gf);
-						add(dad);
-						add(boyfriend);
-					case 768:
-						var evilTrailbf = new FlxTrail(boyfriend, null, 1, 24, 0.3, 0.069);
-						evilTrailbf.alpha = 1;
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1223.95, 594.35, 'bf-sus-second');
-						remove(gf); 
-						remove(dad);
-
-						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-						susbg.antialiasing = true;
-						susbg.scrollFactor.set(1, 1);
-						susbg.active = false;
-						remove(susbg);
-
-						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
-						sus2bg.antialiasing = true;
-						sus2bg.scrollFactor.set(1, 1);
-						sus2bg.active = false;
-
-						add(sus2bg);
-
-						add(evilTrailbf);
-						add(gf);
-						add(dad);
-						add(boyfriend);
-					case 1088:
-						var evilTrailbf = new FlxTrail(boyfriend, null, 1, 24, 0.3, 0.069);
-						evilTrailbf.alpha = 1;
-						FlxTween.tween(evilTrailbf, {alpha: 0}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.1});
-						remove(evilTrailbf);
-						remove(boyfriend);
-						boyfriend = new Boyfriend(1181.65, 596.85, 'bf-sus-first');
-						remove(gf); 
-						remove(dad);
-
-						var sus2bg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg2', 'way'));
-						sus2bg.antialiasing = true;
-						sus2bg.scrollFactor.set(1, 1);
-						sus2bg.active = false;
-
-						remove(sus2bg);
-
-						var susbg:FlxSprite = new FlxSprite( -317.8, -274.85).loadGraphic(Paths.image('sussyBg/sussyBg', 'way'));
-						susbg.antialiasing = true;
-						susbg.scrollFactor.set(1, 1);
-						susbg.active = false;
-						
-						add(susbg);
-
-						add(gf);
-						add(dad);
-						add(boyfriend);
+					if (health > 1.3)
+						health = 1;
+					else
+						health -= 0.3;
+				}
+				case 925:
+				{
+					if (health > 1.3)
+						health = 1;
+					else
+						health -= 0.5;
 				}
 			}
 		}

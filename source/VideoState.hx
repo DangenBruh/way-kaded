@@ -52,7 +52,7 @@ class VideoState extends MusicBeatState
 		
 		if (GlobalVideo.isWebm)
 		{
-		videoFrames = Std.parseInt(Assets.getText(leSource.replace(".webm", ".txt")));
+			videoFrames = Std.parseInt(Assets.getText(leSource.replace(".webm", ".txt")));
 		}
 		
 		fuckingVolume = FlxG.sound.music.volume;
@@ -218,18 +218,19 @@ class VideoState extends MusicBeatState
 	
 	public function pauseShit() 
 	{
-		
-			txt.text = pauseText;
-			trace("PRESSED PAUSE");
-			GlobalVideo.get().togglePause();
-			if (GlobalVideo.get().paused)
-			{
-				videoSprite.alpha = 0.5;
-				GlobalVideo.get().alpha();
-			} else {
-				videoSprite.alpha = 1;
-				GlobalVideo.get().unalpha();
-				txt.text = defaultText;
-			}
+		txt.text = pauseText;
+		trace("PRESSED PAUSE");
+		GlobalVideo.get().togglePause();
+		if (GlobalVideo.get().paused)
+		{
+			videoSprite.alpha = 0.5;
+			GlobalVideo.get().alpha();
+		}
+		else
+		{
+			videoSprite.alpha = 1;
+			GlobalVideo.get().unalpha();
+			txt.text = defaultText;
+		}
 	}
 }

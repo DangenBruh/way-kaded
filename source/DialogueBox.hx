@@ -236,7 +236,7 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 		swagDialogue.font = 'Pixel Arial 11 Bold';
 		swagDialogue.color = 0xFF3F2021;
-		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)]; //this is kinda useless but cool
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
@@ -340,6 +340,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitLeft.visible = true;
 					portraitLeft.animation.play('enter');
+					swagDialogue.sounds = [FlxG.sound.load(Paths.sound('wayText'), 0.6)];
 				}
 					
 			case 'bf':
@@ -349,6 +350,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
+					swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bfText'), 0.6)];
 				}
 					
 			case 'gf':
@@ -358,6 +360,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitGf.visible = true;
 					portraitGf.animation.play('enter');
+					swagDialogue.sounds = [FlxG.sound.load(Paths.sound('gfText'), 1)];
 				}
 			case 'bfgf':
 				portraitLeft.visible = false;
@@ -367,6 +370,7 @@ class DialogueBox extends FlxSpriteGroup
 					portraitGf.animation.play('enter');
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
+					swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bfgfText'), 0.6)];
 				}
 		}
 	}

@@ -26,12 +26,12 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['way', 'always', 'no-way', 'sussy'],
+		['way', 'always', 'no-way', 'sussus'],
 		['straightaway', 'takeaway', 'wackyway', '???????']
 	];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true];
+	public static var weekUnlocked:Array<Bool> = [true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
@@ -336,12 +336,13 @@ class StoryMenuState extends MusicBeatState
 					if(curWeek == 1)
 					{
 						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
-							FlxG.switchState(new VideoState('assets/videos/presunday/vid.webm', loadplayState));
+							FlxG.switchState(new VideoState('assets/videos/way/vid.webm', loadplayState));
 						});
 					}
 					else {
 						FlxG.switchState(new PlayState());
 					}
+					// LoadingState.loadAndSwitchState(new PlayState());
 				});
 			}
 		}

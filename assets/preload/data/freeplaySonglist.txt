@@ -2,7 +2,7 @@ Tutorial:gf:0
 Way:way:1
 Always:way-angy:1
 No-way:way-mad:1
-Sussy:bf-sus-first:1
+Sussus:bf-sus-first:1
 Crewmate:crewmate:1
 bonus-songs:test:2
 fun:expurgation:2
