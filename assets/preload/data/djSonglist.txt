@@ -1,7 +1,7 @@
 internal,tutorial,gf,good
 internal,way,way,good
-internal,always,way-angy,good
-internal,no-way,way-mad,good
+internal,always,way-angy,bad
+internal,no-way,way-mad,bad
 internal,sussy,bf-sus-first,bad
 internal,crewmate,crewmate,good
 internal,bonus-songs,gf,good
