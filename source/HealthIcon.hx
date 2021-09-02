@@ -17,6 +17,7 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1, 30], 0, false, isPlayer);
+		animation.add('bot', [0, 1, 30], 0, false, isPlayer);
 		animation.add('bf-old', [2, 3, 31], 0, false, isPlayer);
 		animation.add('bf-rtx', [0, 1, 30], 0, false, isPlayer);
 		animation.add('bf-sus-first', [12, 13, 12], 0, false, isPlayer);
@@ -49,7 +50,7 @@ class HealthIcon extends FlxSprite
 
 		switch(char)
 		{
-			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel' | 'way-pixel':
+			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel' | 'way-pixel' | 'bot':
 				antialiasing = false;
 		}
 

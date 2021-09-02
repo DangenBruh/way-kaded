@@ -24,7 +24,7 @@ class EndingState extends FlxState
 		var end:FlxSprite = new FlxSprite(0, 0);
 		if (_badEnding)
 		{
-			end.loadGraphic(Paths.image("badending"));
+			end.loadGraphic(Paths.image("endings/badending" + PlayState.language));
 			FlxG.sound.playMusic(Paths.music("badending"),1,false);
 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 		}
@@ -34,9 +34,6 @@ class EndingState extends FlxState
 		}
 		add(end);
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-		
-		
-		new FlxTimer().start(30, endIt);
 		
 	}
 	

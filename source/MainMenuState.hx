@@ -27,6 +27,14 @@ class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
 
+	private var bgColors:Array<String> = [
+		'#3e70c9',
+		'#70a1d4',
+		'#d175cb',
+		'#a65fcf'
+	];
+	private var colorRotation:Int = 1;
+
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
@@ -70,6 +78,18 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = true;
 		add(bg);
+
+		if (PlayState.langoption == 4)
+		{
+			FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+		
+			new FlxTimer().start(2, function(tmr:FlxTimer)
+			{
+				FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+				if(colorRotation < (bgColors.length - 1)) colorRotation++;
+				else colorRotation = 0;
+			}, 0);
+		}
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);

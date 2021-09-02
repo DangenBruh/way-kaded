@@ -31,6 +31,8 @@ class StoryMenuState extends MusicBeatState
 	];
 	var curDifficulty:Int = 1;
 
+	var isCutscene:Bool = false;
+
 	public static var weekUnlocked:Array<Bool> = [true, true];
 
 	var weekCharacters:Array<Dynamic> = [
@@ -63,6 +65,49 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		switch(PlayState.langoption)
+		{
+			case 0:
+			{
+				var weekNames:Array<String> = [
+					"How to Funk",
+					"OMG NO WAY!!!!!",
+					"the story continues?.."
+				];
+			}
+			case 1:
+			{
+				var weekNames:Array<String> = [
+					"Туториал",
+					"ВОУ НИФИГА СЕБЕ",
+					"история продолжается?.."
+				];
+			}
+			case 2:
+			{
+				var weekNames:Array<String> = [
+					"Como entrar no funk",
+					"OMG DE MANEIRA nenhuma!!!!!",
+					"a história continua?.."
+				];
+			}
+			case 3:
+			{
+				var weekNames:Array<String> = [
+					"Come funk",
+					"OMG NESSUN MODO!!!!!",
+					"la storia continua?.."
+				];
+			}
+			case 4:
+			{
+				var weekNames:Array<String> = [
+					"How to sing like a chad",
+					"OML NO WAY!!!!!",
+					"the story continues?.."
+				];
+			}
+		}
 		#if windows
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Story Mode Menu", null);
@@ -196,9 +241,35 @@ class StoryMenuState extends MusicBeatState
 		switch (curWeek)
 		{
 			case 1 | 2:
-				scoreText.text = "WAYK SCORE:" + lerpScore;
+				switch(PlayState.langoption)
+				{
+					case 0:
+						scoreText.text = "WAYK SCORE:" + lerpScore;
+					case 1:
+						scoreText.text = "СЧЁТ ЗА УРОВЕНЬ:" + lerpScore;
+					case 2:
+						scoreText.text = "PONTUAÇÃO DA SEMANA:" + lerpScore;
+					case 3:
+						scoreText.text = "PUNTEGGIO SETTIMANA:" + lerpScore;
+					case 4:
+						scoreText.text = "WAYKEND SCORE:" + lerpScore;
+				}
+				
 			default:
-				scoreText.text = "WEEK SCORE:" + lerpScore;
+				switch(PlayState.langoption)
+				{
+					case 0:
+						scoreText.text = "WEEK SCORE:" + lerpScore;
+					case 1:
+						scoreText.text = "СЧЁТ ЗА УРОВЕНЬ:" + lerpScore;
+					case 2:
+						scoreText.text = "PONTUAÇÃO DA SEMANA:" + lerpScore;
+					case 3:
+						scoreText.text = "PUNTEGGIO SETTIMANA:" + lerpScore;
+					case 4:
+						scoreText.text = "WEEKEND SCORE:" + lerpScore;
+
+				}
 		}
 		txtWeekTitle.text = weekNames[curWeek].toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
@@ -331,23 +402,30 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
+
+			var video:MP4Handler = new MP4Handler();
+
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if(curWeek == 1)
+					if (curWeek == 1 && !isCutscene)
 					{
 						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
-							FlxG.switchState(new VideoState('assets/videos/way/vid.webm', loadplayState));
+							video.playMP4(Paths.video('way'), new PlayState()); 
+							isCutscene = true;
 						});
 					}
-					else {
-						FlxG.switchState(new PlayState());
+					else
+					{
+						new FlxTimer().start(1, function(tmr:FlxTimer)
+						{
+							if (isCutscene)
+								video.onVLCComplete();
+
+							LoadingState.loadAndSwitchState(new PlayState(), true);
+						});
 					}
-					// LoadingState.loadAndSwitchState(new PlayState());
 				});
 			}
-		}
-		function loadplayState(){
-			LoadingState.loadAndSwitchState(new PlayState(), true);
 		}
 
 	function changeDifficulty(change:Int = 0):Void

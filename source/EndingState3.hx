@@ -24,7 +24,7 @@ class EndingState3 extends FlxState
 		var end:FlxSprite = new FlxSprite(0, 0);
 		if (_badEnding)
 		{
-			end.loadGraphic(Paths.image("susending"));
+			end.loadGraphic(Paths.image("endings/susending" + PlayState.language));
 			FlxG.sound.playMusic(Paths.music("susending"),1,false);
 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 		}
@@ -36,7 +36,7 @@ class EndingState3 extends FlxState
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 		
 		
-		new FlxTimer().start(30, endIt);
+		// new FlxTimer().start(30, endIt);
 		
 	}
 	

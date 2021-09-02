@@ -32,6 +32,34 @@ class GameOverSubstate extends MusicBeatSubstate
 		var daStage = PlayState.curStage;
 		var daBf:String = '';
 
+		switch(PlayState.langoption)
+		{
+			case 0:
+			{
+				space.font = 'Pixel Arial 11 Bold';
+				space.text = 'Press Space to gain health when you need it';
+			}
+			case 1:
+			{
+				space.font = Paths.font("pixel-russian.otf");
+				space.text = 'Нажми пробел что бы восстоновить здоровье';
+			}
+			case 2:
+			{
+				space.font = 'Pixel Arial 11 Bold';
+				space.text = 'Pressione a barra de espaço para ganhar saúde quando precisar';
+			}
+			case 3:
+			{
+				space.font = 'Pixel Arial 11 Bold';
+				space.text = 'Premi la barra spaziatrice per guadagnare salute quando ne hai bisogno';
+			}
+			case 4:
+			{
+				space.font = 'Pixel Arial 11 Bold';
+				space.text = 'push the spacebar to get health mate';
+			}
+		}
 		space.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0, 2, 1);
 
 		switch (PlayState.SONG.player1)

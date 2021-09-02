@@ -11,6 +11,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets;
+import openfl.utils.AssetType;
 
 import openfl.Lib;
 
@@ -19,7 +20,6 @@ using StringTools;
 class VideoState extends MusicBeatState
 {
 	public var leSource:String = "";
-	//public var transClass:FlxState;
 	public var transFunction:Void->Void;
 	public var txt:FlxText;
 	public var fuckingVolume:Float = 1;
@@ -40,7 +40,6 @@ class VideoState extends MusicBeatState
 		super();
 		
 		leSource = source;
-		//transClass = toTrans;
 		transFunction = toTrans;
 	}
 	
@@ -63,9 +62,6 @@ class VideoState extends MusicBeatState
 		#end
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
-		var skipText:FlxText = new FlxText(0, 0, 0, "Press ENTER to Skip", 16);
-		skipText.setBorderStyle(FlxTextBorderStyle.OUTLINE,0xFF000000,2,1);
-		skipText.y = 720 - skipText.height;
 		var html5Text:String = "You Are Not Using HTML5...\nThe Video Didnt Load!";
 		if (isHTML)
 		{
@@ -79,7 +75,6 @@ class VideoState extends MusicBeatState
 		txt.screenCenter();
 		add(txt);
 		add(videoSprite);
-		add(skipText);
 
 		if (GlobalVideo.isWebm)
 		{
@@ -123,7 +118,6 @@ class VideoState extends MusicBeatState
 		//}
 		var data = Main.webmHandle.webm.bitmapData;
 		videoSprite.loadGraphic(data);
-		
 		FlxG.camera.flash(FlxColor.BLACK, 0.5);
 	}
 	
@@ -133,6 +127,7 @@ class VideoState extends MusicBeatState
 		
 		if (ishit < 8) pauseShit();
 		ishit++;
+
 		if (useSound)
 		{
 			var wasFuckingHit = GlobalVideo.get().webm.wasHitOnce;
@@ -223,12 +218,8 @@ class VideoState extends MusicBeatState
 		GlobalVideo.get().togglePause();
 		if (GlobalVideo.get().paused)
 		{
-			videoSprite.alpha = 0.5;
 			GlobalVideo.get().alpha();
-		}
-		else
-		{
-			videoSprite.alpha = 1;
+		} else {
 			GlobalVideo.get().unalpha();
 			txt.text = defaultText;
 		}

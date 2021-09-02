@@ -34,6 +34,19 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 
+		switch(PlayState.langoption)
+		{
+			case 0:
+				menuItems = ['Resume', 'Restart Song', 'Exit to menu'];
+			case 1:
+				menuItems = ['Resume', 'Restart Song', 'Exit to menu'];
+			case 2:
+				menuItems = ['Continuar', 'Reiniciar Musica', 'Sair para o Menu'];
+			case 3:
+				menuItems = ['Continua', 'Ricomicia Canzone', 'Torna al Menu'];
+			case 4:
+				menuItems = ['Continue', 'Replay the song', 'Exit to the menu'];
+		}
 		if (PlayState.instance.useVideo)
 		{
 			menuItems.remove("Resume");
@@ -67,6 +80,20 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelDifficulty);
 
 		var heals:FlxText = new FlxText(20, 15 + 64, 0, "Heals: ", 32);
+		switch(PlayState.langoption)
+		{
+			case 0:
+				heals.text = "Heals: ";
+			case 1:
+				heals.text = "Heals: ";
+			case 2:
+				heals.text = "Curar: ";
+			case 3:
+				heals.text = "Cure: ";
+			case 4:
+				heals.text = "Medicine: ";
+		}
+		
 		if(FlxG.save.data.heals)
 		{
 			heals.text += CoolUtil.healsInt(PlayState.heals).toUpperCase();
@@ -171,7 +198,19 @@ class PauseSubState extends MusicBeatSubstate
 				{
 					grpMenuShit.clear();
 
-					menuItems = ['Restart Song', 'Exit to menu'];
+					switch(PlayState.langoption)
+					{
+						case 0:
+							menuItems = ['Restart Song', 'Exit to menu'];
+						case 1:
+							menuItems = ['Restart Song', 'Exit to menu'];
+						case 2:
+							menuItems = ['Reiniciar Musica', 'Sair para o Menu'];
+						case 3:
+							menuItems = ['Ricomicia Canzone', 'Torna al Menu'];
+						case 4:
+							menuItems = ['Replay the song', 'Exit to the menu'];
+					}
 
 					for (i in 0...menuItems.length)
 					{
@@ -197,7 +236,19 @@ class PauseSubState extends MusicBeatSubstate
 				{
 					grpMenuShit.clear();
 
-					menuItems = ['Restart Song', 'Exit to menu'];
+					switch(PlayState.langoption)
+					{
+						case 0:
+							menuItems = ['Restart Song', 'Exit to menu'];
+						case 1:
+							menuItems = ['Restart Song', 'Exit to menu'];
+						case 2:
+							menuItems = ['Reiniciar Musica', 'Sair para o Menu'];
+						case 3:
+							menuItems = ['Ricomicia Canzone', 'Torna al Menu'];
+						case 4:
+							menuItems = ['Replay the song', 'Exit to the menu'];
+					}
 
 					for (i in 0...menuItems.length)
 					{
@@ -221,9 +272,9 @@ class PauseSubState extends MusicBeatSubstate
 
 			switch (daSelected)
 			{
-				case "Resume":
+				case "Resume", "Continuar", "Continua", "Continue":
 					close();
-				case "Restart Song":
+				case "Restart Song", "Reiniciar Musica", "Ricomicia Canzone", "Replay the song":
 					if (PlayState.instance.useVideo)
 					{
 						GlobalVideo.get().stop();
@@ -231,7 +282,7 @@ class PauseSubState extends MusicBeatSubstate
 						PlayState.instance.removedVideo = true;
 					}
 					FlxG.resetState();
-				case "Exit to menu":
+				case "Exit to menu", "Sair para o Menu", "Torna al Menu", "Exit to the menu":
 					if (PlayState.instance.useVideo)
 					{
 						GlobalVideo.get().stop();

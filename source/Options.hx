@@ -10,6 +10,7 @@ import openfl.Lib;
 
 class OptionCategory
 {
+
 	private var _options:Array<Option> = new Array<Option>();
 	public final function getOptions():Array<Option>
 	{
@@ -380,9 +381,6 @@ class ScoreScreen extends Option
 	}
 }
 
-
-
-
 class FPSCapOption extends Option
 {
 	public function new(desc:String)
@@ -605,6 +603,45 @@ class AccuracyDOption extends Option
 	private override function updateDisplay():String
 	{
 		return "Accuracy Mode: " + (FlxG.save.data.accuracyMod == 0 ? "Accurate" : "Complex");
+	}
+}
+
+class Language extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		PlayState.langoption = PlayState.langoption + 1;
+		if (PlayState.langoption < 0)
+			PlayState.langoption = 0;
+		if (PlayState.langoption > 4)
+			PlayState.langoption = 0;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		var lan:String = '';
+		switch(PlayState.langoption)
+		{
+			case 0:
+				lan = 'English';
+			case 1:
+				lan = 'Russian';
+			case 2:
+				lan = 'Portuguese';
+			case 3:
+				lan = 'Italian';
+			case 4:
+				lan = 'British'; //yes
+		}
+		return "Language: " + lan;
 	}
 }
 

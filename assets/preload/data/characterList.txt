@@ -12,3 +12,4 @@ way-pixel
 expurgation
 crewmate
 mark-bs
+bot

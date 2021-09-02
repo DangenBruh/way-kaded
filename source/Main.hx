@@ -86,7 +86,7 @@ class Main extends Sprite
 		addChild(game);
 			
 		var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
-		WebmPlayer.SKIP_STEP_LIMIT = 90;
+		// WebmPlayer.SKIP_STEP_LIMIT = 90;
 		var str1:String = "WEBM SHIT"; 
 		webmHandle = new WebmHandler();
 		

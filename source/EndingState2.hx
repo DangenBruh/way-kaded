@@ -29,8 +29,8 @@ class EndingState2 extends FlxState
 		var end:FlxSprite = new FlxSprite(0, 0);
 		if (_goodEnding)
 		{
-			end.loadGraphic(Paths.image("goodending"));
-			FlxG.sound.playMusic(Paths.inst("test"),1,false);
+			end.loadGraphic(Paths.image("endings/goodending" + PlayState.language));
+			FlxG.sound.playMusic(Paths.inst("bonus-songs"),1,false);
 			FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 			// 	}
 			// else
@@ -53,9 +53,6 @@ class EndingState2 extends FlxState
 		}
 		add(end);
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-		
-		
-		new FlxTimer().start(30, endIt);
 		
 	}
 	
