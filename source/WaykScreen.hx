@@ -1,6 +1,7 @@
 package;
 import flixel.*;
 import flixel.util.FlxColor;
+import flixel.system.FlxSound;
 import flixel.util.FlxTimer;
 
 /**
@@ -24,13 +25,6 @@ class WaykScreen extends MusicBeatState
 		add(lmaonowayk2foryoulol);
 
 		var video:MP4Handler = new MP4Handler();
-
-		new FlxTimer().start(120, function(tmr:FlxTimer)
-		{
-			FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
-				video.playMP4(Paths.nine('t'), new StoryMenuState());
-			});
-		});
 	}
 	
 	

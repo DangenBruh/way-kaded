@@ -428,28 +428,25 @@ class StoryMenuState extends MusicBeatState
 
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (curWeek == 1 && !isCutscene)
+					switch(curWeek)
 					{
-						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
-							video.playMP4(Paths.video('way'), new PlayState()); 
-							isCutscene = true;
-						});
-					}
-					if (curWeek == 2)
-					{
-						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
-							LoadingState.loadAndSwitchState(new WaykScreen(), false);
-						});
-					}
-					else
-					{
-						new FlxTimer().start(1, function(tmr:FlxTimer)
-						{
-							if (isCutscene)
-								video.onVLCComplete();
-
-							LoadingState.loadAndSwitchState(new PlayState(), true);
-						});
+						case 1:
+							FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+								video.playMP4(Paths.video('way'), new PlayState()); 
+								isCutscene = true;
+							});
+						case 2:
+							FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+								LoadingState.loadAndSwitchState(new WaykScreen(), false);
+							});
+						default:
+							new FlxTimer().start(1, function(tmr:FlxTimer)
+							{
+								if (isCutscene)
+									video.onVLCComplete();
+	
+								LoadingState.loadAndSwitchState(new PlayState(), true);
+							});
 					}
 				});
 			}

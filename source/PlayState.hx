@@ -747,7 +747,11 @@ class PlayState extends MusicBeatState
 				dad.x = 99.15;
 				dad.y = 467.7;
 			case 'stage':
-				dad.y += 300;
+				switch (SONG.player2)
+				{
+					case 'way':
+						dad.y += 300;
+				}
 			case 'wayBg':
 				boyfriend.x = 1308.5;
 				boyfriend.y = 624.55;
