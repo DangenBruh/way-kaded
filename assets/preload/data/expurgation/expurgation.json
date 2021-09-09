@@ -1,7 +1,7 @@
 {
   "song": {
     "sectionLengths": [],
-    "player1": "bf",
+    "player1": "bf-rtx",
     "notes": [
       {
         "sectionNotes": [],
@@ -3481,6 +3481,7 @@
       }
     ],
     "player2": "expurgation",
+    "gfVersion": "gf-rtx",
     "song": "expurgation",
     "validScore": true,
     "sections": 0,

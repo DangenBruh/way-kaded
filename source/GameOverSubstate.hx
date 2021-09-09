@@ -52,7 +52,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			case 3:
 			{
 				space.font = 'Pixel Arial 11 Bold';
-				space.text = 'Premi la barra spaziatrice per guadagnare salute quando ne hai bisogno';
+				space.text = 'Premi Spazio per curarti';
 			}
 			case 4:
 			{

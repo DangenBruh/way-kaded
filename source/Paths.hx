@@ -96,6 +96,11 @@ class Paths
 		return getPath('videos/$key.mp4', BINARY, library);
 	}
 
+	inline static public function nine(key:String, ?library:String)
+	{
+		return getPath('sounds/$key.mp4', BINARY, library);
+	}
+
 	inline static public function music(key:String, ?library:String)
 	{
 		return getPath('music/$key.$SOUND_EXT', MUSIC, library);

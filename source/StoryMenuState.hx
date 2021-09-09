@@ -33,7 +33,7 @@ class StoryMenuState extends MusicBeatState
 
 	var isCutscene:Bool = false;
 
-	public static var weekUnlocked:Array<Bool> = [true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true]; //true
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
@@ -79,7 +79,7 @@ class StoryMenuState extends MusicBeatState
 			{
 				var weekNames:Array<String> = [
 					"Туториал",
-					"ВОУ НИФИГА СЕБЕ",
+					"АХ*ЕТЬ ЭТО ВЕЙАЫДЛПЛОЫВДАЛОЫ!!!!!!!!!!!",
 					"история продолжается?.."
 				];
 			}
@@ -128,12 +128,23 @@ class StoryMenuState extends MusicBeatState
 		scoreText.setFormat("VCR OSD Mono", 32);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
-		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
+
+		if(PlayState.langoption == 1)
+		{
+			txtWeekTitle.setFormat(Paths.font("vcr-rus.ttf"), 32, FlxColor.WHITE, RIGHT);
+			weekNames = ["Туториал", "АХ*ЕТЬ ЭТО ВЕЙАЫДЛПЛОЫВДАЛОЫ!!!!!!!!!!!", "история продолжается?.."];
+		}
+		else
+			txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
+		
 		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("vcr.ttf"), 32);
+		if(PlayState.langoption == 1)
+			rankText.setFormat(Paths.font("vcr-rus.ttf"), 32);
+		else
+			rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
@@ -244,14 +255,19 @@ class StoryMenuState extends MusicBeatState
 				switch(PlayState.langoption)
 				{
 					case 0:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "WAYK SCORE:" + lerpScore;
 					case 1:
-						scoreText.text = "СЧЁТ ЗА УРОВЕНЬ:" + lerpScore;
+						scoreText.setFormat(Paths.font("vcr-rus.ttf"), 32);
+						scoreText.text = "ВЕЙ ЗА УРОВЕНЬ:" + lerpScore;
 					case 2:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "PONTUAÇÃO DA SEMANA:" + lerpScore;
 					case 3:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "PUNTEGGIO SETTIMANA:" + lerpScore;
 					case 4:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "WAYKEND SCORE:" + lerpScore;
 				}
 				
@@ -259,14 +275,19 @@ class StoryMenuState extends MusicBeatState
 				switch(PlayState.langoption)
 				{
 					case 0:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "WEEK SCORE:" + lerpScore;
 					case 1:
+						scoreText.setFormat(Paths.font("vcr-rus.ttf"), 32);
 						scoreText.text = "СЧЁТ ЗА УРОВЕНЬ:" + lerpScore;
 					case 2:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "PONTUAÇÃO DA SEMANA:" + lerpScore;
 					case 3:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "PUNTEGGIO SETTIMANA:" + lerpScore;
 					case 4:
+						scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 						scoreText.text = "WEEKEND SCORE:" + lerpScore;
 
 				}
@@ -412,6 +433,12 @@ class StoryMenuState extends MusicBeatState
 						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
 							video.playMP4(Paths.video('way'), new PlayState()); 
 							isCutscene = true;
+						});
+					}
+					if (curWeek == 2)
+					{
+						FlxG.camera.fade(FlxColor.BLACK, 1, false, function(){
+							LoadingState.loadAndSwitchState(new WaykScreen(), false);
 						});
 					}
 					else

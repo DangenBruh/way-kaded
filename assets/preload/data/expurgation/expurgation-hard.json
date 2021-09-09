@@ -1,7 +1,7 @@
 {
   "song": {
     "sectionLengths": [],
-    "player1": "bf",
+    "player1": "bf-rtx",
     "notes": [
       {
         "sectionNotes": [],
@@ -3483,6 +3483,7 @@
     "player2": "expurgation",
     "song": "expurgation",
     "validScore": true,
+    "gfVersion": "gf-rtx",
     "sections": 0,
     "needsVoices": true,
     "stage": "MadWayBg",

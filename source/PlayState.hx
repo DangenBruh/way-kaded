@@ -163,7 +163,7 @@ class PlayState extends MusicBeatState
 	private var songPositionBar:Float = 0;
 	
 	private var generatedMusic:Bool = false;
-	private var shakecam:Bool = false;
+	private var shakeCam:Bool = false;
 	private var startingSong:Bool = false;
 
 	public var iconP1:HealthIcon; //making these public again because i may be stupid
@@ -746,6 +746,8 @@ class PlayState extends MusicBeatState
 
 				dad.x = 99.15;
 				dad.y = 467.7;
+			case 'stage':
+				dad.y += 300;
 			case 'wayBg':
 				boyfriend.x = 1308.5;
 				boyfriend.y = 624.55;
@@ -771,8 +773,16 @@ class PlayState extends MusicBeatState
 				gf.x = 279.4;
 				gf.y = -53.95;
 
-				dad.x = -472.3;
-				dad.y = -40.9;
+				if (dad.curCharacter == 'expurgation')
+				{
+					dad.x = -178.85;
+					dad.y = 194.35;
+				}
+				else
+				{
+					dad.x = -472.3;
+					dad.y = -40.9;
+				}
 			case 'sussyBg':
 				boyfriend.x = 1181.65;
 				boyfriend.y = 596.85;
@@ -836,9 +846,9 @@ class PlayState extends MusicBeatState
 					remove(gf);
 					remove(boyfriend);
 					var evilTrail = new FlxTrail(dad, null, 1, 24, 0.25, 0.069); //i dont even know what the fuck any those paramentors mean
+					add(gf);
 					add(evilTrail);
 					add(dad);
-					add(gf);
 					add(boyfriend);
 				}
 				else //this code is so dumb but i just want to put the trail behind the big man way
@@ -846,9 +856,9 @@ class PlayState extends MusicBeatState
 					remove(dad);
 					remove(gf);
 					remove(boyfriend);
-					add(dad);
 					add(gf);
 					add(boyfriend);
+					add(dad);
 				}
 			if (curStage == 'MadWayBg')
 			{
@@ -1126,6 +1136,21 @@ class PlayState extends MusicBeatState
 			{
 				default:
 					startCountdown();
+			}
+		}
+
+		if(PlayStateChangeables.botPlay)
+		{
+			switch(curSong)
+			{
+				case 'sussus', 'high-school-conflict', 'power-link':
+				default:
+				{
+					iconP1.animation.play('bfbot');
+					remove(boyfriend);
+					boyfriend = new Boyfriend(boyfriend.x, boyfriend.y, "bfbot");
+					add(boyfriend);
+				}
 			}
 		}
 
@@ -1420,7 +1445,7 @@ class PlayState extends MusicBeatState
 		var dataNotes = [];
 		notes.forEachAlive(function(daNote:Note)
 		{
-			if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && daNote.noteData == data)
+			if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && daNote.noteData == data && daNote.noteType <= 1)
 				dataNotes.push(daNote);
 		}); // Collect notes that can be hit
 
@@ -1888,15 +1913,20 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		// if (shakeCam)
+		// {
+		// 	FlxG.camera.shake(0.03, 0.02);
+		// }
+
 		#if !debug
 		perfectMode = false;
 		#end
 
-		if (SONG.song.toLowerCase() == 'no-way' && storyDifficulty >= 2) //totally not copying tabis code
+		if (curStage == 'MadWayBg' && storyDifficulty >= 2) //totally not copying tabis code
 		{
 			redscreenshit.alpha = 1 - (health / 3);
 		}
-		else if (SONG.song.toLowerCase() == 'no-way') //but actually credits to Gweb
+		else if (curStage == 'MadWayBg') //but actually credits to Gweb
 		{
 			redscreenshit.alpha = 1 - (health / 2);
 		}
@@ -2722,14 +2752,18 @@ class PlayState extends MusicBeatState
 											health -= 0;
 										else
 											health -= 0.02;
+									if(FlxG.save.data.distractions)
+										FlxG.camera.shake(0.02, 0.01);
 								case 'expurgation':
-									if (health > 0.8)
-										health -= 0.08;
+									if (health > 0.9)
+										health -= 0.09;
 									else
-										health -= 0.003;
+										health -= 0.004;
 									gf.playAnim('scared');
+									if(FlxG.save.data.distractions)
+										FlxG.camera.shake(0.04, 0.02);
 								case 'bf-pixel':
-									if (health > 0.1)
+									if (health > 0.2)
 										health -= 0.1;
 							}
 						}
@@ -2739,10 +2773,12 @@ class PlayState extends MusicBeatState
 							{
 								case 'expurgation':
 									if (health > 1)
-										health -= 0.04;
+										health -= 0.05;
 									else
-										health -= 0.01;
-									gf.playAnim('scared');	
+										health -= 0.002;
+									gf.playAnim('scared');
+									if(FlxG.save.data.distractions)
+										FlxG.camera.shake(0.03, 0.01);
 								case 'bf-pixel':
 									if (health > 0.5)
 										health -= 0.05;
@@ -2838,8 +2874,7 @@ class PlayState extends MusicBeatState
 							daNote.visible = false;
 							daNote.kill();
 							notes.remove(daNote, true);
-						}
-					
+					}
 				});
 			}
 
@@ -3732,7 +3767,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			if (curSong == 'casanova')
+			if (curSong == 'casanova' || curSong == 'sussus')
 				health -= 0.02;
 			else
 				health -= 0.04;
@@ -4168,32 +4203,35 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-		if (curSong == 'always')
+		if(isStoryMode)
 		{
-			switch (curStep)
+			if (curSong == 'always')
 			{
-				case 756:
+				switch (curStep)
 				{
-					if (health < 1)
+					case 756:
 					{
-						FlxG.camera.fade(FlxColor.GRAY, 0.3, false, function(){
-							FlxG.switchState(new EndingState());
-						});
+						if (health < 1)
+						{
+							FlxG.camera.fade(FlxColor.GRAY, 0.3, false, function(){
+								FlxG.switchState(new EndingState());
+							});
+						}
 					}
 				}
 			}
-		}
-		if (curSong == 'no-way')
-		{
-			switch (curStep)
+			if (curSong == 'no-way')
 			{
-				case 1200:
+				switch (curStep)
 				{
-					if (health < 1)
+					case 1200:
 					{
-						FlxG.camera.fade(FlxColor.BLACK, 0.3, false, function(){
-							FlxG.switchState(new EndingState2());
-						});
+						if (health < 1)
+						{
+							FlxG.camera.fade(FlxColor.BLACK, 0.3, false, function(){
+								FlxG.switchState(new EndingState2());
+							});
+						}
 					}
 				}
 			}
@@ -4297,7 +4335,6 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-
 		#if windows
 		if (executeModchart && luaModchart != null)
 		{

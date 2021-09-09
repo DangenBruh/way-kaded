@@ -432,7 +432,7 @@ class TitleState extends MusicBeatState
 					addMoreText('KadeDeveloper');
 				else
 				{
-					addMoreText('Newgrounds');
+					addMoreText('your mom');
 					ngSpr.visible = true;
 				}
 			// credTextShit.text += '\nNewgrounds';

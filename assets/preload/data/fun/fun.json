@@ -1,7 +1,7 @@
 {
   "song": {
     "sectionLengths": [],
-    "player1": "bf",
+    "player1": "bf-rtx",
     "notes": [
       {
         "lengthInSteps": 16,
@@ -1653,6 +1653,7 @@
     "validScore": true,
     "sections": 0,
     "stage": "MadWayBg",
+    "gfVersion": "gf-rtx",
     "needsVoices": true,
     "speed": 3,
     "bpm": 245

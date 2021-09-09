@@ -150,12 +150,8 @@ class Character extends FlxSprite
 
 				flipX = true;
 
-			case 'bot':
-				var tex = Paths.getSparrowAtlas('characters/bot', 'shared');
-				frames = tex;
-
-				trace(tex.frames.length);
-
+			case 'bfbot':
+				frames = Paths.getSparrowAtlas('characters/bot', 'shared');
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
@@ -391,16 +387,24 @@ class Character extends FlxSprite
 			case 'way': //way
 				frames = Paths.getSparrowAtlas('characters/way');
 				animation.addByPrefix('idle', 'way idle', 24, false);
-				animation.addByPrefix('singUP', 'way up', 24, false);
-				animation.addByPrefix('singDOWN', 'way down', 24, false);
-				animation.addByPrefix('singLEFT', 'way left', 24, false);
-				animation.addByPrefix('singRIGHT', 'way right', 24, false);
+				animation.addByPrefix('singUP', 'way up0', 24, false);
+				animation.addByPrefix('singDOWN', 'way down0', 24, false);
+				animation.addByPrefix('singLEFT', 'way left0', 24, false);
+				animation.addByPrefix('singRIGHT', 'way right0', 24, false);
+				animation.addByPrefix('singUPmiss', 'way up miss', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'way down miss', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'way left miss', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'way right miss', 24, false);
 		
 				addOffset('idle', -47, -35);
 				addOffset("singUP", -55, -1);
 				addOffset("singRIGHT", -59, -35);
 				addOffset("singLEFT", -16, -33);
 				addOffset("singDOWN", -55, -77);
+				addOffset("singUPmiss", -55, -1);
+				addOffset("singRIGHTmiss", -59, -35);
+				addOffset("singLEFTmiss", -16, -33);
+				addOffset("singDOWNmiss", -55, -77);
 						
 				playAnim('idle');
 		
@@ -492,11 +496,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'left', 24, false);
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
-				addOffset('idle', 0, -169);
-				addOffset("singUP", 59, 133);
-				addOffset("singRIGHT", -339, -261);
-				addOffset("singLEFT", 342, 5);
-				addOffset("singDOWN", -31, -553);
+				addOffset('idle', 0, 0);
+				addOffset("singUP", 40, 260);
+				addOffset("singRIGHT", -190, 0);
+				addOffset("singLEFT", 280, 140);
+				addOffset("singDOWN", -50, -71);
 
 				playAnim('idle');
 			case 'crewmate':
